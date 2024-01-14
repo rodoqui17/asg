@@ -14,18 +14,31 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background: rgb(1, 20, 75);
+  /* background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,12,1) 0%, rgba(0,212,255,1) 100%); */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(239, 233, 233);
+}
+
+.App-title {
+  background: rgb(1, 20, 75);
+  /* background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,12,1) 0%, rgba(0,212,255,1) 100%); */
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: rgb(239, 233, 233);
 }
 
 .App-link {
-  color: #61dafb;
+  color: #e5eaec;
 }
 
 @keyframes App-logo-spin {
