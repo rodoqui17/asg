@@ -69,21 +69,21 @@ function CreaActivo() {
         });
         setMessage(hash);
       });
+      //actualizar los campos de referencia en base a los siguientes campos
       const datosJSON = {
-        nombre: lote.current.value,
-        apellido: cantidad.current.value,
-        fecha_nac: "17/01/1983",
-        telefono: "72565853",
-        email: "quiroz.rodrigo@gmail.com",
-        ciudad: "La Paz",
-        nacionalidad: "Boliviano",
-        nft: "MarteID",
-        genero: "1",
-        temainteres: "espacial",
-        ocupacion: "Estudiante",
-        contract: "0",
+        tipoIndicador: req.body.tipoIndicador,
+        nombre: req.body.nombre,
+        descripcion: req.body.descripcion,
+        areaImpacto: req.body.areaImpacto,
+        latitud: req.body.latitud,
+        longitud: req.body.longitud,
+        beneficiarios: [req.body.beneficiarios],
+        accionesImplementadas: [req.body.accionesImplementadas],
+        impactoSocial: req.body.impactoSocial,
+        responsableParticipacion: req.body.responsableParticipacion,
       };
       axios
+        // .post(baseURL,datosJSON)
         .get(baseURL)
         .then((response) => {
           setPost(JSON.stringify(response.data));
@@ -158,7 +158,7 @@ function CreaActivo() {
                   style={{ width: "auto", height: "120px" }}
                 >
                   <Card.Header as="h3" style={{ color: "#2043b6" }}>
-                    Nro Lote
+                   Iniciativa
                   </Card.Header>
                   <Card.Body>
                     <div className="input-group">
