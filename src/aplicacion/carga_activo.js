@@ -84,7 +84,7 @@ function CreaActivo() {
         contract: "0",
       };
       axios
-        .post(baseURL, datosJSON)
+        .get(baseURL, datosJSON)
         .then((response) => {
           setPost(JSON.stringify(response.data));
           console.log(response.data);
