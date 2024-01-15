@@ -61,12 +61,14 @@ function CreaActivo() {
       inputfile.current.value !== ""
     ) {
       calculateSHA256(inputfile.current.files[0]).then((hash) => {
+       
         Swal.fire({
           title: "REGISTRO GENERADO",
           text: hash,
           icon: "success",
           confirmButtonText: "Aceptar",
         });
+        return hash;
         setMessage(hash);
       });
       //actualizar los campos de referencia en base a los siguientes campos
