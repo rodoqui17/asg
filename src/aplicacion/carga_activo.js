@@ -371,22 +371,37 @@ function CreaActivo() {
                       <div className="header">CERTIFICADO GENERADO</div>
                       <div className="body">
                         <div className="message">
-                          <Table striped>
-                            <thead>
-                              <tr>
-                                <th>Tipo Indicador</th>
-                                {/* Agrega otras columnas según sea necesario */}
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {Object.values(respuestas).map((fila, index) => (
-                                <tr key={index}>
-                                  <td>{fila.tipoIndicador}</td>
-                                  {/* Agrega otras celdas según sea necesario */}
-                                </tr>
-                              ))}
-                            </tbody>
-                          </Table>
+                          <Container style={{ padding: "20px" }}>
+                            <header className="App-title mb-4">
+                              <h2>Activos Ambientales</h2>
+                            </header>
+                            <section className="mb-2">
+                              <Table striped bordered hover>
+                                <thead>
+                                  <tr>
+                                    <th style={{ width: '10%' }}>Indicador</th>
+                                    <th style={{ width: '20%' }}>Nombre</th>
+                                    <th style={{ width: '20%' }}>Impacto Social</th>
+                                    <th style={{ width: '20%' }}>Área de Impacto</th>
+                                    <th style={{ width: '30%' }}>Certificado</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {Object.values(respuestas).map((fila, index) => (
+                                    <tr key={index}>
+                                      <td>{fila.tipoIndicador}</td>
+                                      <td>{fila.nombre}</td>
+                                      <td>{fila.impactoSocial}</td>
+                                      <td>{fila.areaImpacto}</td>
+                                      <td>
+                                        <a href={fila.enlace}>{fila.responsableParticipacion}</a> empresa responsable
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </Table>
+                            </section>
+                          </Container>
                         </div>
                       </div>
                       <div class="footer">
