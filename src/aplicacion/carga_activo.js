@@ -77,7 +77,7 @@ function CreaActivo() {
             responsableParticipacion: responsables.current.value,
           };
 
-          setMessage({ message: JSON.stringify(datosJSON), hashresult: hash })
+          setMessage({ data: datosJSON, hashresult: hash })
 
           axios
             //.post(baseURL,datosJSON)
@@ -372,7 +372,7 @@ function CreaActivo() {
                       <div className="header">CERTIFICADO GENERADO</div>
                       <div className="body">
                         <div className="message">
-                          <td>{message.message[0]}</td>
+                          <td>{message.data}</td>
                          
                         </div>
                       </div>
