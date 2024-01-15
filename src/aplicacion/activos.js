@@ -4,10 +4,22 @@ import { useAuth } from "../auth/auth";
 import NAVEGATION from "./navegation";
 import axios from 'axios';
 // import {useNavigate} from 'react-router-dom';
-
+const [respuestas, setRespuestas] = useState([]);
 
 function Activos() {
-        
+         axios
+        //.post(baseURL,datosJSON)
+       .get(baseURL)
+        .then((response) => {
+          setRespuestas(JSON.stringify(response.data));
+          console.log(response.data);
+          console.log(hash);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+}
     // const [user, setUser] = useState(null)
      const auth = useAuth();
     // const navigate = useNavigate();
@@ -45,7 +57,7 @@ function Activos() {
                     <Table striped>
                         <thead>
                             <tr>
-                                <th>Token</th>
+                                <th>Indicador</th>
                                 <th>Material</th>
                                 <th>Peso</th>
                                 <th>Valor</th>
@@ -55,12 +67,12 @@ function Activos() {
                         </thead>
                         <tbody>
                               <tbody>
-        {datos.map((fila, index) => (
+        {respuestas.map((fila, index) => (
           <tr key={index}>
-            <td>{fila.columna1}</td>
-            <td>{fila.columna2}</td>
-            <td>{fila.columna1}</td>
-            <td>{fila.columna2}</td>
+            <td>{fila.tipoIndicador}</td>
+            <td>{fila.tipoIndicador}</td>
+            <td>{fila.tipoIndicador}</td>
+            <td>{fila.tipoIndicador}</td>
             <td> <a href="/link">Enlace</a> </td>
                     {/* Agrega más celdas según sea necesario */}
                   </tr>
