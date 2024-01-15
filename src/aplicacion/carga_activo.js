@@ -86,7 +86,6 @@ function CreaActivo() {
             .then((response) => {
               setPost(JSON.stringify(response.data));
               console.log(response.data);
-
               console.log(hash);
             })
             .catch((error) => {
@@ -377,7 +376,7 @@ function CreaActivo() {
                       <div className="body">
                         <h3>{message}</h3>
                         <p>{post}</p>
-                        <p>{respuestas}</p>
+                       
                       </div>
                     </div>
                   </div>
