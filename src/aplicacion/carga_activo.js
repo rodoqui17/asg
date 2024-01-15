@@ -45,7 +45,7 @@ function CreaActivo() {
       nombre.current.value !== "" &&
       inputfile.current.value !== ""
     ) {
-      const hashdata =  calculateSHA256(inputfile.current.files[0]).then((hash) => {
+      const hashdata = await calculateSHA256(inputfile.current.files[0]).then((hash) => {
        
         Swal.fire({
           title: "REGISTRO GENERADO",
