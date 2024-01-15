@@ -39,7 +39,7 @@ function CreaActivo() {
 
 
 
- async function send() {
+function send() {
     if (
       tipoIndicador.current.value !== "" &&
       nombre.current.value !== "" &&
