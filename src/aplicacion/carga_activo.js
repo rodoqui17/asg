@@ -77,7 +77,7 @@ function CreaActivo() {
             responsableParticipacion: responsables.current.value,
           };
 
-          setMessage({ dataresult: JSON.stringify(datosJSON), hashresult: hash })
+          setMessage(JSON.stringify(datosJSON.responsableParticipacion))
 
           axios
             //.post(baseURL,datosJSON)
