@@ -19,7 +19,7 @@ function Activos() {
             console.log(error);
         });
 
-}
+
 // const [user, setUser] = useState(null)
 const auth = useAuth();
 // const navigate = useNavigate();
