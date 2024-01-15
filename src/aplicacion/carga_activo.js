@@ -27,7 +27,7 @@ function CreaActivo() {
         const wordArray = CryptoJS.lib.WordArray.create(reader.result);
         const hash = CryptoJS.SHA256(wordArray).toString(CryptoJS.enc.Hex);
         resolve(hash);
-        return hash
+        setMessage(hash);
       };
       reader.onerror = function (error) {
         reject(error);
@@ -45,7 +45,7 @@ function send() {
       nombre.current.value !== "" &&
       inputfile.current.value !== ""
     ) {
-      calculateSHA256(inputfile.current.files[0]).then((hash) => {
+    const hashresult =  calculateSHA256(inputfile.current.files[0]).then((hash) => {
        
         Swal.fire({
           title: "REGISTRO GENERADO",
@@ -57,8 +57,8 @@ function send() {
         setMessage(hash);
       });
       //devuelve el hash generado de la funcion
-
-      console.log(hash)
+      console.log(message);
+      console.log(hashresult)
       const datosJSON = {
         tipoIndicador: tipoIndicador.current.value,
         nombre: nombre.current.value,
