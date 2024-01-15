@@ -61,7 +61,7 @@ function send() {
 
     // Ahora hash contiene el valor resuelto de la promesa
     console.log(hash);
-    return hash;
+  
   // Enviamos el POST para el registro
      const datosJSON = {
         tipoIndicador: tipoIndicador.current.value,
