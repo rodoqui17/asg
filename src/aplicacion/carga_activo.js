@@ -81,8 +81,8 @@ function CreaActivo() {
           setRespuestas(datosJSON);
 
           axios
-            .post(baseURL,datosJSON)
-            //.get(baseURL)
+            //.post(baseURL,datosJSON)
+            .get(baseURL)
             .then((response) => {
               setPost(JSON.stringify(response.data));
               console.log(response.data);
@@ -374,7 +374,7 @@ function CreaActivo() {
                     <div className="certificado">
                       <div className="header">CERTIFICADO</div>
                       <div className="body">
-                        <h3>{message}</h3>
+                        <h5>{message}</h5>
                         <p>{post}</p>
                        
                       </div>
