@@ -1,94 +1,63 @@
+// Importa los componentes y estilos necesarios
 import React, { useEffect, useState } from 'react';
 import { Container, Table } from "react-bootstrap";
-import { useAuth } from "../auth/auth";
 import NAVEGATION from "./navegation";
 import axios from 'axios';
-// import {useNavigate} from 'react-router-dom';
+import { useAuth } from "../auth/auth";
 
 const baseURL = "https://r3colectaback.herokuapp.com/asg/asg";
+
 function Activos() {
     const [respuestas, setRespuestas] = useState([]);
+    const auth = useAuth();
+
     useEffect(() => {
-    axios
-        //.post(baseURL,datosJSON)
-        .get(baseURL)
-        .then((response) => {
-            setRespuestas(JSON.stringify(response.data.message));
-            console.log(response.data);
-            
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-
+        axios
+            .get(baseURL)
+            .then((response) => {
+                setRespuestas(response.data.message);
+                console.log(response.data.message);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }, []);
-// const [user, setUser] = useState(null)
-const auth = useAuth();
-// const navigate = useNavigate();
-// auth.login(user)
-// navigate('/panel')
-return (
 
-    <div>
-        <NAVEGATION />
-        <Container style={{ padding: "20px" }}>
-            <header
-                className="App-title mb-4"
-                style={{
-                    width: "100%",
-                    position: 'relative',
-                    height: 10,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-
-            >
-
-
-                <h2>CERTIFICADOS CREADOS {auth.user}</h2>
-            </header>
-            <section
-                className="mb-4"
-                style={{
-                    width: "100%",
-                    position: 'relative',
-                    height: 10,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}>
-                <Table striped>
-                    <thead>
-                        <tr>
-                            <th>Indicador</th>
-                            <th>Material</th>
-                            <th>Peso</th>
-                            <th>Valor</th>
-                            <th>Certificado</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
+    return (
+        <div>
+            <NAVEGATION />
+            <Container style={{ padding: "20px" }}>
+                <header className="App-title mb-4">
+                    <h2>CERTIFICADOS CREADOS {auth.user}</h2>
+                </header>
+                <section className="mb-4">
+                    <Table striped>
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Material</th>
+                                <th>Peso</th>
+                                <th>Valor</th>
+                                <th>Certificado</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             {respuestas.map((fila, index) => (
                                 <tr key={index}>
                                     <td>{fila.tipoIndicador}</td>
-                                    <td>{fila.tipoIndicador}</td>
-                                    <td>{fila.tipoIndicador}</td>
-                                    <td>{fila.tipoIndicador}</td>
-                                    <td> <a href="/link">Enlace</a> </td>
+                                    <td>{fila.tipoMaterial}</td>
+                                    <td>{fila.peso}</td>
+                                    <td>{fila.valor}</td>
+                                    <td><a href={fila.enlace}>{fila.certificado}</a></td>
                                     {/* Agrega más celdas según sea necesario */}
                                 </tr>
                             ))}
                         </tbody>
-
-                    </tbody>
-                </Table>
-            </section>
-        </Container>
-    </div>
-
-);
-
+                    </Table>
+                </section>
+            </Container>
+        </div>
+    );
 }
 
-export default Activos
+export default Activos;
