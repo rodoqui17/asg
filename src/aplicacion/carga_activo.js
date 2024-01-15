@@ -77,13 +77,13 @@ function CreaActivo() {
             responsableParticipacion: responsables.current.value,
           };
 
-          setMessage(hash)
-
+          setMessage(hash);
+          setRespuestas(datosJSON);
           axios
             //.post(baseURL,datosJSON)
             .get(baseURL)
             .then((response) => {
-              setRespuestas(response.data.message);
+              setPost(response.data.message);
               console.log(response.data);
               console.log(hash);
             })
