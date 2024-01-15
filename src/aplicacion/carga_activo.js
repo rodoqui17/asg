@@ -401,12 +401,13 @@ function CreaActivo() {
                                 </tbody>
                               </Table>
                             </section>
+                            <div class="footer">
+                              {message}
+                            </div>
                           </Container>
                         </div>
                       </div>
-                      <div class="footer">
-                        {message}
-                      </div>
+
                     </div>
                   </div>
                 </Card>
