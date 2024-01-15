@@ -353,6 +353,11 @@ function CreaActivo() {
                 </Card>
               </Col>
               <Col xs={12} md={12} s={{ order: 1 }} style={{ padding: "30px" }}>
+                <Button variant="primary" onClick={send}>
+                  Generar Certificado
+                </Button>{" "}
+              </Col>
+              <Col xs={12} md={12} s={{ order: 1 }} style={{ padding: "30px" }}>
                 {" "}
                 {/* <Card
                   border="primary"
@@ -372,14 +377,11 @@ function CreaActivo() {
                       <div className="body">
                         <p>{message}</p>
                       </div>
-
                     </div>
                   </div>
                 </Card>
               </Col>
-              <Button variant="primary" onClick={send}>
-                Generar Certificado
-              </Button>{" "}
+
             </Row>
           </Container>
 
