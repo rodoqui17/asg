@@ -80,6 +80,7 @@ function send() {
        .get(baseURL)
         .then((response) => {
           setPost(JSON.stringify(response.data.message));
+          setMessage(datosJSON)
           console.log(response.data);
           console.log(hash);
         })
@@ -356,7 +357,7 @@ console.log("send");
                     CERTIFICADO GENERADO
                   </Card.Header>
                   <Card.Body>
-                    <Card.Text style={{ color: "#2043b6" }}>{post}</Card.Text>
+                    <Card.Text style={{ color: "#2043b6" }}>{message}</Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
