@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Container, Button, Row, Col, Card } from "react-bootstrap";
+import { Container, Button, Row, Col, Card, Table } from "react-bootstrap";
 import Swal from "sweetalert2";
 import NAVEGATION from "./navegation";
 import axios from "axios";
