@@ -28,7 +28,7 @@ function Activos() {
             <NAVEGATION />
             <Container style={{ padding: "20px" }}>
                 <header className="App-title mb-4">
-                    <h2>CERTIFICADOS CREADOS {auth.user}</h2>
+                    <h2>ACtivos Ambientales</h2>
                 </header>
                 <section className="mb-4">
                     <Table striped>
