@@ -372,7 +372,7 @@ function CreaActivo() {
                       <div className="header">CERTIFICADO GENERADO</div>
                       <div className="body">
                         <div className="message">
-                        <th>{message.message}</th>
+                        <th>{message.message.tipoIndicador}</th>
                         <th>{message.hashresult}</th>
                         
 
