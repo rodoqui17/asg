@@ -26,7 +26,7 @@ function App() {
 
         <Routes>
 
-          <Route exact path="/" element={<LOGIN />} />
+          <Route exact path="/" element={<ACTIVOS />} />
           <Route exact path="/panel" element={<PANEL />} />
           <Route exact path="/activos" element={<ACTIVOS />} />
           <Route exact path="/validar" element={<VALIDAR />} />

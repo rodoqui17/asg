@@ -1,5 +1,13 @@
-import React, { useRef, useState } from "react";
-import { Container, Button, Row, Col, Card, Table } from "react-bootstrap";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Container,
+  Button,
+  Row,
+  Col,
+  Card,
+  Dropdown,
+  selectedOption,
+} from "react-bootstrap";
 import Swal from "sweetalert2";
 import NAVEGATION from "./navegation";
 import axios from "axios";
@@ -7,7 +15,9 @@ import "../App.css";
 import logo from "../assets/logo_circular.png";
 const CryptoJS = require("crypto-js");
 const baseURL = "https://r3colectaback.herokuapp.com/asg/newasg";
+//const baseURL = "http://localhost:3500/asg/newasg";
 function CreaActivo() {
+  //STATES
   const [message, setMessage] = useState("");
   const [visible, setVisible] = useState("hidden");
   const [_tipoIndicador, setTipoIndicador] = useState("");
@@ -20,7 +30,10 @@ function CreaActivo() {
   // const [message, setMessage] = useState("");
   // const [message, setMessage] = useState("");
   // const [message, setMessage] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
   const [post, setPost] = React.useState(null);
+
+  //REFERENCIAS
   const tipoIndicador = useRef(null);
   const nombre = useRef(null);
   const descripcion = useRef(null);
@@ -33,6 +46,8 @@ function CreaActivo() {
   const impacto = useRef(null);
   const responsables = useRef(null);
   const [respuestas, setRespuestas] = useState([]);
+
+  //FUNCIONES
   function calculateSHA256(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -48,13 +63,18 @@ function CreaActivo() {
       reader.readAsArrayBuffer(file);
     });
   }
-  // Ejemplo de uso
+
+  //dropdown
+  const handleDropdownSelect = (eventKey) => {
+    setSelectedOption(eventKey);
+  };
 
   //funcion para descargar el certificado
   const handleDownloadPDF = () => {
-  console.log("descargar");
-    };
+    console.log("descargar");
+  };
 
+  //funcion para enviar el certificado
   function send() {
     if (
       tipoIndicador.current.value !== "" &&
@@ -97,10 +117,11 @@ function CreaActivo() {
             accionesImplementadas: acciones.current.value,
             impactoSocial: impacto.current.value,
             responsableParticipacion: responsables.current.value,
+            identificador: hash,
           };
 
           setMessage(hash);
-
+          console.log(datosJSON);
           axios
             .post(baseURL, datosJSON)
             //.get(baseURL)
@@ -178,6 +199,38 @@ function CreaActivo() {
                   </Card.Body>
                 </Card>
               </Col>
+              {/* <Col xs={12} md={4} s={{ order: 1 }} style={{ padding: "10px" }}>
+                <Card>
+                  <Card.Header as="h3" style={{ color: "#2043b6" }}>
+                    Indicador
+                  </Card.Header>
+                  <Card.Body>
+                    <Dropdown
+                      onSelect={handleDropdownSelect}
+                      ref={tipoIndicador}
+                    >
+                      <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                        {selectedOption || "Selecciona..."}
+                      </Dropdown.Toggle>
+                      <Dropdown.Menu>
+                        <Dropdown.Item eventKey="opcion1">
+                          Opción 1
+                        </Dropdown.Item>
+                        <Dropdown.Item eventKey="opcion2">
+                          Opción 2
+                        </Dropdown.Item>
+                        <Dropdown.Item eventKey="opcion3">
+                          Opción 3
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+
+                    {selectedOption && (
+                      <p>Has seleccionado: {selectedOption}</p>
+                    )}
+                  </Card.Body>
+                </Card>
+              </Col> */}
               <Col xs={12} md={4} s={{ order: 1 }} style={{ padding: "10px" }}>
                 <Card
                   border="primary"
@@ -478,18 +531,23 @@ function CreaActivo() {
                               paddingTop: "80px",
                             }}
                           >
-                            <strong>Hash documento :</strong> {message}
+                            <strong>Identificador :</strong> {message}
                           </p>
                         </footer>
                       </div>
                     </div>
                   </div>
-              
-                  <Col xs={12} md={12} s={{ order: 1 }} style={{ padding: "30px", textAlign:"center" }}>
-                <Button variant="primary" onClick={handleDownloadPDF}>
-                Descargar Certificado
-                </Button>{" "}
-              </Col>
+
+                  <Col
+                    xs={12}
+                    md={12}
+                    s={{ order: 1 }}
+                    style={{ padding: "30px", textAlign: "center" }}
+                  >
+                    <Button variant="primary" onClick={handleDownloadPDF}>
+                      Descargar Certificado
+                    </Button>{" "}
+                  </Col>
                 </Card>
                 {/* <Card className="certificado-card" border="primary">
                   <div className="bodycert">

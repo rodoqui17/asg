@@ -1,5 +1,5 @@
 
-import logo from '../shared/logo512.png';
+import logo from '../assets/logo_circular.png';
 import { Form, Card, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
@@ -43,7 +43,7 @@ function Login() {
                 // icon: 'success',
                 confirmButtonText: 'Ingresar'
             }).then(function () {
-                window.location = "/panel";
+                window.location = "/activos";
             });
       
     };
@@ -59,7 +59,7 @@ function Login() {
 
     function resultado(user, pass) {
         auth.login(user)
-         navigate('/panel')
+         navigate('/activos')
         console.log(user.current.value);
         console.log(pass.current.value);
         user.current.placeholder = "";
