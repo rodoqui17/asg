@@ -363,14 +363,14 @@ function CreaActivo() {
                     <Card.Text style={{ color: "#2043b6" }}>{message}</Card.Text>
                   </Card.Body>
                 </Card> */}
-                
-                  <div class="certificado">
-                    <div class="header">CERTIFICADO GENERADO</div>
-                    <div class="body">
-                      <div class="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                <div className= "bodycert">
+                  <div className="certificado">
+                    <div className="header">CERTIFICADO GENERADO</div>
+                    <div className="body">
+                      <div className="message">{message}</div>
                     </div>
                   </div>
-                
+                  </div>
               </Col>
               <Button variant="primary" onClick={send}>
                 Generar Certificado
