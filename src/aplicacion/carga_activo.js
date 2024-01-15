@@ -57,7 +57,7 @@ function send() {
       confirmButtonText: "Aceptar",
     });
 
-    setMessage(hash);
+    // setMessage(hash);
 
     // Ahora hash contiene el valor resuelto de la promesa
     console.log(hash);
@@ -75,12 +75,14 @@ function send() {
         impactoSocial: impacto.current.value,
         responsableParticipacion: hash,
       };
+
+      setMessage(datosJSON)
+
       axios
         //.post(baseURL,datosJSON)
        .get(baseURL)
         .then((response) => {
-          setPost(JSON.stringify(response.data.message));
-          setMessage(datosJSON)
+          setPost(JSON.stringify(response.data.message));   
           console.log(response.data);
           console.log(hash);
         })
