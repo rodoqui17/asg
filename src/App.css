@@ -49,3 +49,44 @@
     transform: rotate(360deg);
   }
 }
+
+
+body {
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.certificado {
+  width: 600px;
+  height: 400px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid #2043b6;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.header {
+  background-color: #2043b6;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.body {
+  padding: 20px;
+  text-align: center;
+}
+
+.message {
+  color: #2043b6;
+  font-size: 18px;
+}
+</style>

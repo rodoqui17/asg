@@ -3,6 +3,7 @@ import { Container, Button, Row, Col, Card } from "react-bootstrap";
 import Swal from "sweetalert2";
 import NAVEGATION from "./navegation";
 import axios from "axios";
+import "../../App.css"
 const CryptoJS = require("crypto-js");
 const baseURL = "https://r3colectaback.herokuapp.com/asg/asg";
 function CreaActivo() {
@@ -16,9 +17,9 @@ function CreaActivo() {
   const longitud = useRef(null);
   const beneficiarios = useRef(null);
   const inputfile = useRef(null);
-    const acciones = useRef(null);
-    const impacto = useRef(null);
-    const responsables = useRef(null);
+  const acciones = useRef(null);
+  const impacto = useRef(null);
+  const responsables = useRef(null);
 
   function calculateSHA256(file) {
     return new Promise((resolve, reject) => {
@@ -39,67 +40,67 @@ function CreaActivo() {
 
 
 
-function send() {
+  function send() {
     if (
       tipoIndicador.current.value !== "" &&
       nombre.current.value !== "" &&
       inputfile.current.value !== ""
     ) {
 
- async function obtenerHash() {
-  try {
-    const hash = await calculateSHA256(inputfile.current.files[0]);
-    
-    Swal.fire({
-      title: "REGISTRO GENERADO",
-      text: hash,
-      icon: "success",
-      confirmButtonText: "Aceptar",
-    });
+      async function obtenerHash() {
+        try {
+          const hash = await calculateSHA256(inputfile.current.files[0]);
 
-    // setMessage(hash);
+          Swal.fire({
+            title: "REGISTRO GENERADO",
+            text: hash,
+            icon: "success",
+            confirmButtonText: "Aceptar",
+          });
 
-    // Ahora hash contiene el valor resuelto de la promesa
-    console.log(hash);
-  
-  // Enviamos el POST para el registro
-     const datosJSON = {
-        tipoIndicador: tipoIndicador.current.value,
-        nombre: nombre.current.value,
-        descripcion: descripcion.current.value,
-        areaImpacto: areaimpacto.current.value,
-        latitud: latitud.current.value,
-        longitud: longitud.current.value,
-        beneficiarios: beneficiarios.current.value,
-        accionesImplementadas: acciones.current.value,
-        impactoSocial: impacto.current.value,
-        responsableParticipacion: responsables.current.value,
-      };
+          // setMessage(hash);
 
-      setMessage('METADATOS: '+ JSON.stringify(datosJSON) + 'valor HASH: ' + hash)
-
-      axios
-        //.post(baseURL,datosJSON)
-       .get(baseURL)
-        .then((response) => {
-          setPost(JSON.stringify(response.data.message));   
-          console.log(response.data);
+          // Ahora hash contiene el valor resuelto de la promesa
           console.log(hash);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    
-  } catch (error) {
-    console.error('Error al calcular el hash:', error);
-  }
-}
 
-// Llamada a la función asincrónica
-obtenerHash();
-console.log("send");   
+          // Enviamos el POST para el registro
+          const datosJSON = {
+            tipoIndicador: tipoIndicador.current.value,
+            nombre: nombre.current.value,
+            descripcion: descripcion.current.value,
+            areaImpacto: areaimpacto.current.value,
+            latitud: latitud.current.value,
+            longitud: longitud.current.value,
+            beneficiarios: beneficiarios.current.value,
+            accionesImplementadas: acciones.current.value,
+            impactoSocial: impacto.current.value,
+            responsableParticipacion: responsables.current.value,
+          };
+
+          setMessage('METADATOS: ' + JSON.stringify(datosJSON) + 'valor HASH: ' + hash)
+
+          axios
+            //.post(baseURL,datosJSON)
+            .get(baseURL)
+            .then((response) => {
+              setPost(JSON.stringify(response.data.message));
+              console.log(response.data);
+              console.log(hash);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+
+        } catch (error) {
+          console.error('Error al calcular el hash:', error);
+        }
+      }
+
+      // Llamada a la función asincrónica
+      obtenerHash();
+      console.log("send");
     } else {
-       setMessage("Datos invalidos")
+      setMessage("Datos invalidos")
       Swal.fire({
         title: "Información Invalida",
         text: "No pueden existir datos nulos",
@@ -155,7 +156,7 @@ console.log("send");
                   style={{ width: "auto", height: "120px" }}
                 >
                   <Card.Header as="h3" style={{ color: "#2043b6" }}>
-                   Tipo Iniciativa
+                    Tipo Iniciativa
                   </Card.Header>
                   <Card.Body>
                     <div className="input-group">
@@ -215,7 +216,7 @@ console.log("send");
                   style={{ width: "auto", height: "120px" }}
                 >
                   <Card.Header as="h3" style={{ color: "#2043b6" }}>
-                  Area Impacto
+                    Area Impacto
                   </Card.Header>
                   <Card.Body>
                     <div className="input-group">
@@ -229,13 +230,13 @@ console.log("send");
                   </Card.Body>
                 </Card>
               </Col>
-                           <Col xs={12} md={4} s={{ order: 1 }} style={{ padding: "10px" }}>
+              <Col xs={12} md={4} s={{ order: 1 }} style={{ padding: "10px" }}>
                 <Card
                   border="primary"
                   style={{ width: "auto", height: "120px" }}
                 >
                   <Card.Header as="h3" style={{ color: "#2043b6" }}>
-                  Latitud
+                    Latitud
                   </Card.Header>
                   <Card.Body>
                     <div className="input-group">
@@ -249,13 +250,13 @@ console.log("send");
                   </Card.Body>
                 </Card>
               </Col>
-                           <Col xs={12} md={4} s={{ order: 1 }} style={{ padding: "10px" }}>
+              <Col xs={12} md={4} s={{ order: 1 }} style={{ padding: "10px" }}>
                 <Card
                   border="primary"
                   style={{ width: "auto", height: "120px" }}
                 >
                   <Card.Header as="h3" style={{ color: "#2043b6" }}>
-                  Longitud
+                    Longitud
                   </Card.Header>
                   <Card.Body>
                     <div className="input-group">
@@ -309,7 +310,7 @@ console.log("send");
                   </Card.Body>
                 </Card>
               </Col>
-                          <Col xs={12} md={4} s={{ order: 1 }} style={{ padding: "10px" }}>
+              <Col xs={12} md={4} s={{ order: 1 }} style={{ padding: "10px" }}>
                 <Card
                   border="primary"
                   style={{ width: "auto", height: "120px" }}
@@ -329,7 +330,7 @@ console.log("send");
                   </Card.Body>
                 </Card>
               </Col>
-                                   <Col xs={12} md={4} s={{ order: 1 }} style={{ padding: "10px" }}>
+              <Col xs={12} md={4} s={{ order: 1 }} style={{ padding: "10px" }}>
                 <Card
                   border="primary"
                   style={{ width: "auto", height: "120px" }}
@@ -368,6 +369,15 @@ console.log("send");
               </Button>{" "}
             </Row>
           </Container>
+
+          <body>
+            <div class="certificado">
+              <div class="header">CERTIFICADO GENERADO</div>
+              <div class="body">
+                <div class="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+              </div>
+            </div>
+          </body>
         </section>
       </Container>
     </div>
