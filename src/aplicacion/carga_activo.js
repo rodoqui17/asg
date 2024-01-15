@@ -373,7 +373,7 @@ function CreaActivo() {
                       <div className="body">
                         <div className="message">
                           <tbody>
-                            {message.map((fila, index) => (
+                            {datosJSON.map((fila, index) => (
                               <tr key={index}>
                                 <td>{fila.tipoIndicador}</td>
                                 <td>{fila.nombre}</td>
