@@ -39,7 +39,7 @@ function CreaActivo() {
 
 
 
-function send() {
+async function send() {
     if (
       tipoIndicador.current.value !== "" &&
       nombre.current.value !== "" &&
@@ -47,7 +47,7 @@ function send() {
     ) {
 
       
-    const hashresult =  calculateSHA256(inputfile.current.files[0]).then((hash) => {
+    const hashresult =  await calculateSHA256(inputfile.current.files[0]).then((hash) => {
        
         Swal.fire({
           title: "REGISTRO GENERADO",
