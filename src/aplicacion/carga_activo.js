@@ -46,10 +46,8 @@ function send() {
       inputfile.current.value !== ""
     ) {
 
-      async function obtenerHash() {
-  try {
       
-    const hashresult =  await calculateSHA256(inputfile.current.files[0]).then((hash) => {
+    const hashresult =  calculateSHA256(inputfile.current.files[0]).then((hash) => {
        
         Swal.fire({
           title: "REGISTRO GENERADO",
@@ -87,7 +85,7 @@ function send() {
         });
 
       console.log("send");
-  
+    
     } else {
        setMessage("Datos invalidos")
       Swal.fire({
@@ -97,18 +95,6 @@ function send() {
         confirmButtonText: "Aceptar",
       });
     }
-
-    // Ahora hash contiene el valor resuelto de la promesa
-    console.log(hash);
-    return hash;
-  } catch (error) {
-    console.error('Error al calcular el hash:', error);
-  }
-}
-
-// Llamada a la función asincrónica
-obtenerHash();
-
   }
   return (
     <div>
