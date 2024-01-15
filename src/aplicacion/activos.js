@@ -5,7 +5,7 @@ import NAVEGATION from "./navegation";
 import axios from 'axios';
 // import {useNavigate} from 'react-router-dom';
 const [respuestas, setRespuestas] = useState([]);
-
+const baseURL = "https://r3colectaback.herokuapp.com/asg/asg";
 function Activos() {
          axios
         //.post(baseURL,datosJSON)
