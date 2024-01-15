@@ -79,12 +79,15 @@ function CreaActivo() {
 
           setMessage(hash);
           setRespuestas(JSON.stringify(datosJSON));
+          console.log(respuestas)
           axios
             //.post(baseURL,datosJSON)
             .get(baseURL)
             .then((response) => {
               setPost(JSON.stringify(response.data.message));
               console.log(response.data);
+              setRespuestas(response.data.message);
+              console.log(respuestas);
               console.log(hash);
             })
             .catch((error) => {
