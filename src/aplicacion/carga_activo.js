@@ -72,8 +72,8 @@ function send() {
         responsableParticipacion: responsables.current.value,
       };
       axios
-        .post(baseURL,datosJSON)
-        //.get(baseURL)
+        // .post(baseURL,datosJSON)
+       .get(baseURL)
         .then((response) => {
           setPost(JSON.stringify(response.data));
           console.log(response.data);
