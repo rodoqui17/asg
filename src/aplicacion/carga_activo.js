@@ -76,7 +76,7 @@ function send() {
         responsableParticipacion: responsables.current.value,
       };
 
-      setMessage('METADATOS: '+ datosJSON + 'valor HASH: ' + hash)
+      setMessage('METADATOS: '+ JSON.stringify(datosJSON) + 'valor HASH: ' + hash)
 
       axios
         //.post(baseURL,datosJSON)
