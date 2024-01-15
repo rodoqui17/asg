@@ -77,7 +77,7 @@ function CreaActivo() {
             responsableParticipacion: responsables.current.value,
           };
 
-          setMessage('METADATOS: ' + JSON.stringify(datosJSON) + 'valor HASH: ' + hash)
+          setMessage({message:JSON.stringify(datosJSON),hashresult:hash})
 
           axios
             //.post(baseURL,datosJSON)
@@ -363,14 +363,32 @@ function CreaActivo() {
                     <Card.Text style={{ color: "#2043b6" }}>{message}</Card.Text>
                   </Card.Body>
                 </Card> */}
-                <div className= "bodycert">
-                  <div className="certificado">
-                    <div className="header">CERTIFICADO GENERADO</div>
-                    <div className="body">
-                      <div className="message">{message}</div>
+                <Card
+                  border="primary"
+                  style={{ width: "auto", height: "auto" }}
+                >
+                  <div className="bodycert">
+                    <div className="certificado">
+                      <div className="header">CERTIFICADO GENERADO</div>
+                      <div className="body">
+                        <div className="message">{message}
+                        <th>{message.tipoIndicador}</th>
+                        <th>{message.nombre}</th>
+                        <th>{message.areaImpacto}</th>
+                        <th>{message.latitud}</th>
+                        <th>{message.longitud}</th>
+                        <th>{message.beneficiarios}</th>
+                        <th>{message.acciones}</th>
+                        <th>{message.impacto}</th>
+                        <th>{message.responsables}</th>
+                        <th>{message.hashresult}</th>
+                        
+
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  </div>
+                </Card>
               </Col>
               <Button variant="primary" onClick={send}>
                 Generar Certificado
