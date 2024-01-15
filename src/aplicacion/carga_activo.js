@@ -79,7 +79,7 @@ function send() {
         //.post(baseURL,datosJSON)
        .get(baseURL)
         .then((response) => {
-          setPost(JSON.stringify(response.data));
+          setPost(JSON.stringify(response.data.message));
           console.log(response.data);
           console.log(hash);
         })
