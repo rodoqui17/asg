@@ -352,7 +352,7 @@ function CreaActivo() {
               </Col>
               <Col xs={12} md={12} s={{ order: 1 }} style={{ padding: "30px" }}>
                 {" "}
-                <Card
+                {/* <Card
                   border="primary"
                   style={{ width: "auto", height: "auto" }}
                 >
@@ -362,7 +362,15 @@ function CreaActivo() {
                   <Card.Body>
                     <Card.Text style={{ color: "#2043b6" }}>{message}</Card.Text>
                   </Card.Body>
-                </Card>
+                </Card> */}
+                
+                  <div class="certificado">
+                    <div class="header">CERTIFICADO GENERADO</div>
+                    <div class="body">
+                      <div class="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                    </div>
+                  </div>
+                
               </Col>
               <Button variant="primary" onClick={send}>
                 Generar Certificado
@@ -370,14 +378,7 @@ function CreaActivo() {
             </Row>
           </Container>
 
-          <body>
-            <div class="certificado">
-              <div class="header">CERTIFICADO GENERADO</div>
-              <div class="body">
-                <div class="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-              </div>
-            </div>
-          </body>
+
         </section>
       </Container>
     </div>
