@@ -73,10 +73,10 @@ function send() {
         beneficiarios: beneficiarios.current.value,
         accionesImplementadas: acciones.current.value,
         impactoSocial: impacto.current.value,
-        responsableParticipacion: hash,
+        responsableParticipacion: responsables.current.value,
       };
 
-      setMessage(datosJSON)
+      setMessage('METADATOS: '+ datosJSON + 'valor HASH: ' + hash)
 
       axios
         //.post(baseURL,datosJSON)
