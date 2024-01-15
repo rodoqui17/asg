@@ -13,7 +13,7 @@ const CryptoJS = require("crypto-js");
 function Validar() {
     const [checksumvalue, setChecksumValue] = useState(['data']);
     //const [data, setData] = useState([]);
-   
+
     const [message, setMessage] = useState('RESULTADO');
     const inputfile = useRef(null);
     const inputext = useRef(null);
@@ -25,56 +25,56 @@ function Validar() {
 
     function calculateSHA256(file) {
         return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-    
-          reader.onload = function () {
-            const wordArray = CryptoJS.lib.WordArray.create(reader.result);
-            const hash = CryptoJS.SHA256(wordArray).toString(CryptoJS.enc.Hex);
-            resolve(hash);
-          };
-    
-          reader.onerror = function (error) {
-            reject(error);
-          };
-    
-          reader.readAsArrayBuffer(file);
-        });
-      }
-    
-    const showFile = (e) => {
-     
-      calculateSHA256(inputfile.current.files[0])
-        .then((hash) => {
-          console.log(hash);
-          if (inputext.current.value === hash) {
-               
-            setMessage("CERTIFICADO VALIDADO")
-            // setChecksumValue(text);
-            Swal.fire({
-                title: 'Certificado Valido',
-                text: 'El Certificado ha sido generado por R3COLECA',
-                icon: 'success',
-                confirmButtonText: 'Aceptar'
-            })
-            inputext.current.value=''
-            inputfile.current.value=''
-            console.log("Valido");
-        } else {
-            setMessage("CERTIFICADO NO VALIDADO")
-            setChecksumValue("{data: no avalible}")
-            Swal.fire({
-                title: 'Certificado Invalido',
-                text: 'El Certificado no coincide con el Identificador',
-                icon: 'error',
-                confirmButtonText: 'Aceptar'
-            })
+            const reader = new FileReader();
 
-        }
-          return hash;
-        })
-        .catch((error) => {
-          console.error(error);
+            reader.onload = function () {
+                const wordArray = CryptoJS.lib.WordArray.create(reader.result);
+                const hash = CryptoJS.SHA256(wordArray).toString(CryptoJS.enc.Hex);
+                resolve(hash);
+            };
+
+            reader.onerror = function (error) {
+                reject(error);
+            };
+
+            reader.readAsArrayBuffer(file);
         });
+    }
+
+    const showFile = (e) => {
+
+        calculateSHA256(inputfile.current.files[0])
+            .then((hash) => {
+                console.log(hash);
+                if (inputext.current.value === hash) {
+
+                    setMessage("CERTIFICADO VALIDADO")
+                    // setChecksumValue(text);
+                    Swal.fire({
+                        title: 'Certificado Valido',
+                        text: 'El Certificado ha sido generado por R3COLECA',
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar'
+                    })
+                    inputext.current.value = ''
+                    inputfile.current.value = ''
+                    console.log("Valido");
+                } else {
+                    setMessage("CERTIFICADO NO VALIDADO")
+                    setChecksumValue("{data: no avalible}")
+                    Swal.fire({
+                        title: 'Certificado Invalido',
+                        text: 'El Certificado no coincide con el Identificador',
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    })
+
+                }
+                return hash;
+            })
+            .catch((error) => {
+                console.error(error);
+            });
 
         setChecksumValue('');
         // console.log(hashSumCalc);
@@ -88,9 +88,9 @@ function Validar() {
             var hash = sha256(text).toString();
             // console.log(text);
             setChecksumValue(text);
-       
 
-            
+
+
         };
         reader.readAsText(e.target.files[0]);
     };
@@ -138,7 +138,7 @@ function Validar() {
                     <div>
 
 
-                        <Container style={{paddingBottom:'30px'}}>
+                        <Container style={{ paddingBottom: '30px' }}>
                             <Row>
                                 <Col xs={12} md={12} s={{ order: 1 }} style={{ padding: '30px' }}> <Card border="primary" style={{ width: 'auto', height: '120px' }}>
                                     <Card.Header as="h3" style={{ color: '#2043b6' }}>Identificador</Card.Header>
@@ -163,15 +163,15 @@ function Validar() {
                                     <Card.Header as="h3" style={{ color: '#2043b6' }}>{message}</Card.Header>
                                     <Card.Body>
 
-                                        <Card.Text style={{ color: '#2043b6' }}>                                           
-                                        {checksumvalue}
-                                        
+                                        <Card.Text style={{ color: '#2043b6' }}>
+                                            {checksumvalue}
+
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
                                 </Col>
                                 <Col xs={12} md={12} s={{ order: 1 }} style={{ paddingLeft: '30px' }}>
-                                <Button variant="primary" onClick={limpiar} >Nueva Consulta</Button>{' '}
+                                    <Button variant="primary" onClick={limpiar} >Nueva Consulta</Button>{' '}
                                 </Col>
                             </Row>
                         </Container>
