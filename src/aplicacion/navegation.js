@@ -25,12 +25,10 @@ function Navegation() {
                     <Navbar.Collapse className="justify-content-end">
                         <Nav className="me-auto">
                             <Nav.Link href="/panel">Operaciones <FaCloudsmith />   </Nav.Link>
-                            //<Nav.Link href="/activos">Mis Certificados <FaTachometerAlt/></Nav.Link>
                             <Nav.Link href="#consultas">Consultas <FaSistrix /> </Nav.Link>
                             <Nav.Link href="/validar">Validar Certificado <FaFingerprint/></Nav.Link>
                             <Nav.Link href="/nuevoactivo"> Nuevo Certificado <FaFolderPlus/></Nav.Link>
-                            //<Nav.Link href="#marketplace">Ofertas <FaDumpster/></Nav.Link>
-                           
+                                                  
                         </Nav>
                          <Navbar.Text>
                           <a href="/">Cerrar </a> 
