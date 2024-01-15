@@ -56,23 +56,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
+  height: auto;
+
+  padding-top: 20px;
+  padding-bottom: 20px;
   background-color: #f0f0f0;
 }
 
 .certificado {
-  width: 900px;
-  height: 500px;
+  width: auto;
+  height: auto;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 2px solid #2043b6;
+  border: 2px solid rgb(1, 20, 75);
   border-radius: 10px;
   overflow: hidden;
+  /* font-family: Georgia, 'Times New Roman', Times, serif; */
+  font-style: italic;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .header {
-  background-color: #2043b6;
+  background-color: rgb(1, 20, 75);
   color: #fff;
   padding: 20px;
   text-align: center;
@@ -82,10 +87,11 @@
 
 .body {
   padding: 10px;
-  text-align: center;
+  text-align: left;
 }
 
 .message {
-  color: #2043b6;
+  color: rgb(1, 20, 75);
   font-size: 18px;
 }
+

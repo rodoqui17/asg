@@ -3,11 +3,23 @@ import { Container, Button, Row, Col, Card, Table } from "react-bootstrap";
 import Swal from "sweetalert2";
 import NAVEGATION from "./navegation";
 import axios from "axios";
-import "../App.css"
+import "../App.css";
+import logo from "../assets/logo_circular.png";
 const CryptoJS = require("crypto-js");
-const baseURL = "https://r3colectaback.herokuapp.com/asg/asg";
+const baseURL = "https://r3colectaback.herokuapp.com/asg/newasg";
 function CreaActivo() {
   const [message, setMessage] = useState("");
+  const [visible, setVisible] = useState("hidden");
+  const [_tipoIndicador, setTipoIndicador] = useState("");
+  const [_nombre, setNombre] = useState("");
+  const [_impacto, SetImpacto] = useState("");
+  const [_beneficiarios, setBeneficiarios] = useState("");
+  const [_descripcion, SetDescripcion] = useState("");
+  const [_areaimpacto, setAreaImpacto] = useState("");
+  // const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
   const [post, setPost] = React.useState(null);
   const tipoIndicador = useRef(null);
   const nombre = useRef(null);
@@ -20,7 +32,7 @@ function CreaActivo() {
   const acciones = useRef(null);
   const impacto = useRef(null);
   const responsables = useRef(null);
-  const [respuestas, setRespuestas] = useState({});
+  const [respuestas, setRespuestas] = useState([]);
   function calculateSHA256(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -38,15 +50,25 @@ function CreaActivo() {
   }
   // Ejemplo de uso
 
-
+  //funcion para descargar el certificado
+  const handleDownloadPDF = () => {
+  console.log("descargar");
+    };
 
   function send() {
     if (
       tipoIndicador.current.value !== "" &&
       nombre.current.value !== "" &&
-      inputfile.current.value !== ""
+      inputfile.current.value !== "" &&
+      descripcion.current.value !== "" &&
+      areaimpacto.current.value !== "" &&
+      latitud.current.value !== "" &&
+      longitud.current.value !== "" &&
+      beneficiarios.current.value !== "" &&
+      acciones.current.value !== "" &&
+      impacto.current.value !== "" &&
+      responsables.current.value !== ""
     ) {
-
       async function obtenerHash() {
         try {
           const hash = await calculateSHA256(inputfile.current.files[0]);
@@ -78,22 +100,27 @@ function CreaActivo() {
           };
 
           setMessage(hash);
-          setRespuestas(datosJSON);
 
           axios
-            //.post(baseURL,datosJSON)
-            .get(baseURL)
+            .post(baseURL, datosJSON)
+            //.get(baseURL)
             .then((response) => {
               setPost(JSON.stringify(response.data));
               console.log(response.data);
+              setTipoIndicador(response.data.tipoIndicador);
+              setNombre(response.data.nombre);
+              SetImpacto(response.data.impactoSocial);
+              setBeneficiarios(response.data.beneficiarios);
+              SetDescripcion(response.data.descripcion);
+              setAreaImpacto(response.data.areaImpacto);
+              setVisible("visible");
               console.log(hash);
             })
             .catch((error) => {
               console.log(error);
             });
-
         } catch (error) {
-          console.error('Error al calcular el hash:', error);
+          console.error("Error al calcular el hash:", error);
         }
       }
 
@@ -101,11 +128,11 @@ function CreaActivo() {
       obtenerHash();
       console.log("send");
     } else {
-      setMessage("Datos invalidos")
+      setMessage("Datos invalidos");
       Swal.fire({
         title: "Información Invalida",
         text: "No pueden existir datos nulos",
-        icon: "error",
+        icon: "warning",
         confirmButtonText: "Aceptar",
       });
     }
@@ -184,7 +211,7 @@ function CreaActivo() {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Ingrese el valor del certificado"
+                        placeholder="Nombre del proyecto"
                         ref={nombre}
                       />
                     </div>
@@ -224,7 +251,7 @@ function CreaActivo() {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Ingrese el valor del certificado"
+                        placeholder="area impacto"
                         ref={areaimpacto}
                       />
                     </div>
@@ -244,7 +271,7 @@ function CreaActivo() {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Ingrese el valor del certificado"
+                        placeholder="Latitud"
                         ref={latitud}
                       />
                     </div>
@@ -264,7 +291,7 @@ function CreaActivo() {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Ingrese el valor del certificado"
+                        placeholder="Longitud"
                         ref={longitud}
                       />
                     </div>
@@ -284,7 +311,7 @@ function CreaActivo() {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Ingrese el valor del certificado"
+                        placeholder="Beneficiarios"
                         ref={beneficiarios}
                       />
                     </div>
@@ -296,7 +323,7 @@ function CreaActivo() {
                   border="primary"
                   style={{ width: "auto", height: "120px" }}
                 >
-                  <Card.Header as="h6" style={{ color: "#2043b6" }}>
+                  <Card.Header as="h5" style={{ color: "#2043b6" }}>
                     Acciones Implementadas
                   </Card.Header>
                   <Card.Body>
@@ -304,7 +331,7 @@ function CreaActivo() {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Ingrese el valor del certificado"
+                        placeholder="Acciones Implementadas"
                         ref={acciones}
                       />
                     </div>
@@ -324,7 +351,7 @@ function CreaActivo() {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Ingrese el valor del certificado"
+                        placeholder="Impacto Social"
                         ref={impacto}
                       />
                     </div>
@@ -344,7 +371,7 @@ function CreaActivo() {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Ingrese el valor del certificado"
+                        placeholder="Responsables de proyecto"
                         ref={responsables}
                       />
                     </div>
@@ -369,24 +396,117 @@ function CreaActivo() {
                     <Card.Text style={{ color: "#2043b6" }}>{message}</Card.Text>
                   </Card.Body>
                 </Card> */}
-                <Card border="primary" style={{ width: "auto", height: "auto" }}>
+                <Card
+                  border="primary"
+                  style={{
+                    width: "auto",
+                    height: "auto",
+                    visibility: `${visible}`,
+                  }}
+                >
                   <div className="bodycert">
                     <div className="certificado">
-                      <div className="header">CERTIFICADO EMITIDO</div>
+                      <div className="header">CERTIFICADO BLOCKCHAIN ASG</div>
+                      <Card.Img
+                        variant="top"
+                        style={{
+                          height: "100px",
+                          width: "100px",
+                          padding: "10px",
+                          textAlign: "center",
+                        }}
+                        src={logo}
+                      />
                       <div className="body">
-                        <h5>{message}</h5>
-                        <p style={{ overflowWrap: 'break-word' }}>{post}</p>
-                        {/* Agrega más elementos según sea necesario */}
+                        <h2
+                          style={{
+                            overflowWrap: "break-word",
+                            padding: "30px",
+                            textAlign: "center",
+                            fontSize: "60px",
+                          }}
+                        >
+                          {_tipoIndicador}
+                        </h2>
+                        <hr></hr>
+                        <h5
+                          style={{
+                            overflowWrap: "break-word",
+                            paddingTop: "20px",
+                          }}
+                        >
+                          <strong>Nombre :</strong> {_nombre}
+                        </h5>
+                        <h5
+                          style={{
+                            overflowWrap: "break-word",
+                            paddingTop: "20px",
+                          }}
+                        >
+                          <strong>Descripción :</strong> {_descripcion}
+                        </h5>
+                        <h5
+                          style={{
+                            overflowWrap: "break-word",
+                            paddingTop: "20px",
+                          }}
+                        >
+                          <strong>Beneficiarios :</strong> {_beneficiarios}
+                        </h5>
+                        <h5
+                          style={{
+                            overflowWrap: "break-word",
+                            paddingTop: "20px",
+                          }}
+                        >
+                          <strong>Impacto Ambiental :</strong> {_areaimpacto}
+                        </h5>
+                        <h5
+                          style={{
+                            overflowWrap: "break-word",
+                            paddingTop: "20px",
+                          }}
+                        >
+                          <strong>Impacto Social :</strong> {_impacto}
+                        </h5>
+
+                        <footer>
+                          <p
+                            style={{
+                              overflowWrap: "break-word",
+                              borderTop: "15px",
+                              paddingTop: "80px",
+                            }}
+                          >
+                            <strong>Hash documento :</strong> {message}
+                          </p>
+                        </footer>
                       </div>
                     </div>
                   </div>
-                </Card>
+              
+                  <Col xs={12} md={12} s={{ order: 1 }} style={{ padding: "30px", textAlign:"center" }}>
+                <Button variant="primary" onClick={handleDownloadPDF}>
+                Descargar Certificado
+                </Button>{" "}
               </Col>
-
+                </Card>
+                {/* <Card className="certificado-card" border="primary">
+                  <div className="bodycert">
+                    <div className="certificado">
+                      <div className="header">CERTIFICADO AMBIENTAL</div>
+                      <div className="body">
+                        <h1>{_tipoIndicador}</h1>
+                        <h2>{_nombre}</h2>
+                        <p>Impacto Social: {_impacto}</p>
+                        <h5>ID: {message}</h5>
+                      </div>
+                    </div>
+                  </div>
+                </Card> */}
+              </Col>
             </Row>
           </Container>
-
-
         </section>
       </Container>
     </div>

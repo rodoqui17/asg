@@ -1,5 +1,5 @@
 import React from "react";
-import logo from '../shared/logo192.png';
+import logo from '../assets/logo_circular.png'
 // import { useAuth } from "../auth/auth";
 import { Navbar, Nav, Container, Card } from 'react-bootstrap';
 import { FaCloudsmith, FaSistrix, FaFingerprint, FaFolderPlus, FaTachometerAlt, FaDumpster } from "react-icons/fa";
@@ -17,15 +17,15 @@ function Navegation() {
                     <Navbar.Brand href="#">
                         <Card.Header className="mb-4">
 
-                            <img src={logo} className="logo" alt="logo" style={{ width: "100%" }} />
+                            <img src={logo} className="logo" alt="logo" style={{ width: "40%" }} />
 
                         </Card.Header>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
                         <Nav className="me-auto">
-                            <Nav.Link href="/panel">Operaciones <FaCloudsmith />   </Nav.Link>
-                            <Nav.Link href="#consultas">Consultas <FaSistrix /> </Nav.Link>
+                            {/* <Nav.Link href="/panel">Operaciones <FaCloudsmith />   </Nav.Link> */}
+                            {/* <Nav.Link href="#consultas">Consultas <FaSistrix /> </Nav.Link> */}
                             <Nav.Link href="/validar">Validar Certificado <FaFingerprint /></Nav.Link>
                             <Nav.Link href="/activos">Activos <FaTachometerAlt /></Nav.Link>
                             <Nav.Link href="/nuevoactivo"> Nuevo Certificado <FaFolderPlus /></Nav.Link>
