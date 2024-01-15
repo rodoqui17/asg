@@ -28,7 +28,7 @@ function Activos() {
             <NAVEGATION />
             <Container style={{ padding: "20px" }}>
                 <header className="App-title mb-4">
-                    <h2>ACtivos Ambientales</h2>
+                    <h2>Activos Ambientales</h2>
                 </header>
                 <section className="mb-2">
                     <Table striped bordered hover>
