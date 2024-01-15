@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import NAVEGATION from "./navegation";
 import axios from "axios";
 const CryptoJS = require("crypto-js");
-const baseURL = "https://r3colectaback.herokuapp.com/asg/asg";
+const baseURL = "https://r3colectaback.herokuapp.com/asg/newasg";
 function CreaActivo() {
   const [message, setMessage] = useState("");
   const [post, setPost] = React.useState(null);
@@ -74,8 +74,8 @@ async function send() {
         responsableParticipacion: responsables.current.value,
       };
       axios
-        // .post(baseURL,datosJSON)
-       .get(baseURL)
+        .post(baseURL,datosJSON)
+       //.get(baseURL)
         .then((response) => {
           setPost(JSON.stringify(response.data));
           console.log(response.data);
