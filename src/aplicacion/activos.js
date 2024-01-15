@@ -30,15 +30,15 @@ function Activos() {
                 <header className="App-title mb-4">
                     <h2>ACtivos Ambientales</h2>
                 </header>
-                <section className="mb-4">
-                    <Table striped>
+                <section className="mb-2">
+                    <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>Indicador</th>
-                                <th>Nombre </th>
-                                <th>Impacto Social</th>
-                                <th>Area de Impacto</th>
-                                <th>Certificado</th>
+                                <th style={{ width: '10%' }}>Indicador</th>
+                                <th style={{ width: '20%' }}>Nombre</th>
+                                <th style={{ width: '20%' }}>Impacto Social</th>
+                                <th style={{ width: '20%' }}>Área de Impacto</th>
+                                <th style={{ width: '30%' }}>Certificado</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,8 +48,9 @@ function Activos() {
                                     <td>{fila.nombre}</td>
                                     <td>{fila.impactoSocial}</td>
                                     <td>{fila.areaImpacto}</td>
-                                    <td><a href={fila.enlace}>{fila.responsableParticipacion}</a> empresa responsable</td>
-                                    {/* Agrega más celdas según sea necesario */}
+                                    <td>
+                                        <a href={fila.enlace}>{fila.responsableParticipacion}</a> empresa responsable
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
