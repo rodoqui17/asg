@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import NAVEGATION from "./navegation";
 import axios from "axios";
 const CryptoJS = require("crypto-js");
-const baseURL = "https://r3colectaback.herokuapp.com/asg/newasg";
+const baseURL = "https://r3colectaback.herokuapp.com/asg/asg";
 function CreaActivo() {
   const [message, setMessage] = useState("");
   const [post, setPost] = React.useState(null);
@@ -62,15 +62,8 @@ function send() {
     // Ahora hash contiene el valor resuelto de la promesa
     console.log(hash);
     return hash;
-  } catch (error) {
-    console.error('Error al calcular el hash:', error);
-  }
-}
-
-// Llamada a la función asincrónica
-obtenerHash();
-console.log(message);      
-      const datosJSON = {
+  // Enviamos el POST para el registro
+     const datosJSON = {
         tipoIndicador: tipoIndicador.current.value,
         nombre: nombre.current.value,
         descripcion: descripcion.current.value,
@@ -83,8 +76,8 @@ console.log(message);
         responsableParticipacion: responsables.current.value,
       };
       axios
-        .post(baseURL,datosJSON)
-       //.get(baseURL)
+        //.post(baseURL,datosJSON)
+       .get(baseURL)
         .then((response) => {
           setPost(JSON.stringify(response.data));
           console.log(response.data);
@@ -92,9 +85,15 @@ console.log(message);
         .catch((error) => {
           console.log(error);
         });
-
-      console.log("send");
     
+  } catch (error) {
+    console.error('Error al calcular el hash:', error);
+  }
+}
+
+// Llamada a la función asincrónica
+obtenerHash();
+console.log("send");   
     } else {
        setMessage("Datos invalidos")
       Swal.fire({
