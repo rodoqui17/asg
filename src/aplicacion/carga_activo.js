@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import NAVEGATION from "./navegation";
 import axios from "axios";
 const CryptoJS = require("crypto-js");
-const baseURL = "https://r3colectaback.herokuapp.com/asg/newasg";
+const baseURL = "https://r3colectaback.herokuapp.com/asg/asg";
 function CreaActivo() {
   const [message, setMessage] = useState("");
   const [post, setPost] = React.useState(null);
@@ -45,7 +45,11 @@ function send() {
       nombre.current.value !== "" &&
       inputfile.current.value !== ""
     ) {
-    const hashresult =  calculateSHA256(inputfile.current.files[0]).then((hash) => {
+
+      async function obtenerHash() {
+  try {
+      
+    const hashresult =  await calculateSHA256(inputfile.current.files[0]).then((hash) => {
        
         Swal.fire({
           title: "REGISTRO GENERADO",
@@ -83,7 +87,7 @@ function send() {
         });
 
       console.log("send");
-    
+  
     } else {
        setMessage("Datos invalidos")
       Swal.fire({
@@ -93,6 +97,18 @@ function send() {
         confirmButtonText: "Aceptar",
       });
     }
+
+    // Ahora hash contiene el valor resuelto de la promesa
+    console.log(hash);
+    return hash;
+  } catch (error) {
+    console.error('Error al calcular el hash:', error);
+  }
+}
+
+// Llamada a la función asincrónica
+obtenerHash();
+
   }
   return (
     <div>
