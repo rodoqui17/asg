@@ -389,7 +389,7 @@ function CreaActivo() {
                         </div>
                       </div>
                       <div class="footer">
-                      {message.hashresult}
+                      {message}
                       </div>
                     </div>
                   </div>
