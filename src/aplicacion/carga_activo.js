@@ -375,8 +375,8 @@ function CreaActivo() {
                       <div className="header">CERTIFICADO</div>
                       <div className="body">
                         <h5>{message}</h5>
-                        <p>{post}</p>
-                       
+                        <p style={{ overflowWrap: 'break-word' }}>{post}</p>
+                        {/* Agrega más elementos según sea necesario */}
                       </div>
                     </div>
                   </div>
