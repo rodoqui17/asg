@@ -15,6 +15,9 @@ function CreaActivo() {
   const color = useRef(null);
   const actividad = useRef(null);
   const inputfile = useRef(null);
+    const acciones = useRef(null);
+    const impacto = useRef(null);
+    const responsables = useRef(null);
 
   function calculateSHA256(file) {
     return new Promise((resolve, reject) => {
@@ -79,10 +82,10 @@ function CreaActivo() {
         areaImpacto: tipo_material.current.value,
         latitud: color.current.value,
         longitud: actividad.current.value,
-        beneficiarios: lote.current.value,
-        accionesImplementadas: lote.current.value,
-        impactoSocial: lote.current.value,
-        responsableParticipacion: lote.current.value,
+        beneficiarios: color.current.value,
+        accionesImplementadas: acciones.current.value,
+        impactoSocial: impacto.current.value,
+        responsableParticipacion: responsables.current.value,
       };
       axios
         .post(baseURL,datosJSON)
@@ -160,7 +163,7 @@ function CreaActivo() {
                   style={{ width: "auto", height: "120px" }}
                 >
                   <Card.Header as="h3" style={{ color: "#2043b6" }}>
-                   Iniciativa
+                   Tipo Iniciativa
                   </Card.Header>
                   <Card.Body>
                     <div className="input-group">
@@ -180,7 +183,7 @@ function CreaActivo() {
                   style={{ width: "auto", height: "120px" }}
                 >
                   <Card.Header as="h3" style={{ color: "#2043b6" }}>
-                    Cantidad
+                    Nombre
                   </Card.Header>
                   <Card.Body>
                     <div className="input-group">
@@ -200,14 +203,14 @@ function CreaActivo() {
                   style={{ width: "auto", height: "120px" }}
                 >
                   <Card.Header as="h3" style={{ color: "#2043b6" }}>
-                    Peso
+                    Descripción
                   </Card.Header>
                   <Card.Body>
                     <div className="input-group">
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Ingrese el valor del certificado"
+                        placeholder="descripción"
                         ref={peso}
                       />
                     </div>
@@ -220,7 +223,7 @@ function CreaActivo() {
                   style={{ width: "auto", height: "120px" }}
                 >
                   <Card.Header as="h3" style={{ color: "#2043b6" }}>
-                    Tipo Material
+                  Area Impacto
                   </Card.Header>
                   <Card.Body>
                     <div className="input-group">
@@ -240,7 +243,7 @@ function CreaActivo() {
                   style={{ width: "auto", height: "120px" }}
                 >
                   <Card.Header as="h3" style={{ color: "#2043b6" }}>
-                    Color
+                    Beneficiarios
                   </Card.Header>
                   <Card.Body>
                     <div className="input-group">
@@ -260,7 +263,7 @@ function CreaActivo() {
                   style={{ width: "auto", height: "120px" }}
                 >
                   <Card.Header as="h3" style={{ color: "#2043b6" }}>
-                    Actividad
+                    Acciones Implementadas
                   </Card.Header>
                   <Card.Body>
                     <div className="input-group">
@@ -268,7 +271,47 @@ function CreaActivo() {
                         type="text"
                         className="form-control"
                         placeholder="Ingrese el valor del certificado"
-                        ref={actividad}
+                        ref={acciones}
+                      />
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+                          <Col xs={12} md={4} s={{ order: 1 }} style={{ padding: "10px" }}>
+                <Card
+                  border="primary"
+                  style={{ width: "auto", height: "120px" }}
+                >
+                  <Card.Header as="h3" style={{ color: "#2043b6" }}>
+                    Impacto Social
+                  </Card.Header>
+                  <Card.Body>
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Ingrese el valor del certificado"
+                        ref={impacto}
+                      />
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+                                   <Col xs={12} md={4} s={{ order: 1 }} style={{ padding: "10px" }}>
+                <Card
+                  border="primary"
+                  style={{ width: "auto", height: "120px" }}
+                >
+                  <Card.Header as="h3" style={{ color: "#2043b6" }}>
+                    Responsables
+                  </Card.Header>
+                  <Card.Body>
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Ingrese el valor del certificado"
+                        ref={responsables}
                       />
                     </div>
                   </Card.Body>
