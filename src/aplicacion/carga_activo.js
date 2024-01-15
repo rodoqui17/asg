@@ -365,22 +365,28 @@ function CreaActivo() {
                     <Card.Text style={{ color: "#2043b6" }}>{message}</Card.Text>
                   </Card.Body>
                 </Card> */}
-                <Card
-                  border="primary"
-                  style={{ width: "auto", height: "auto" }}
-                >
+                <Card border="primary" style={{ width: "auto", height: "auto" }}>
                   <div className="bodycert">
                     <div className="certificado">
                       <div className="header">CERTIFICADO GENERADO</div>
                       <div className="body">
                         <div className="message">
-
-                          {Object.values(respuestas).map((fila, index) => (
-                            <tr key={index}>
-                              <td>{fila.tipoIndicador}</td>
-                            </tr>
-                          ))}
-
+                          <Table striped>
+                            <thead>
+                              <tr>
+                                <th>Tipo Indicador</th>
+                                {/* Agrega otras columnas según sea necesario */}
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {Object.values(respuestas).map((fila, index) => (
+                                <tr key={index}>
+                                  <td>{fila.tipoIndicador}</td>
+                                  {/* Agrega otras celdas según sea necesario */}
+                                </tr>
+                              ))}
+                            </tbody>
+                          </Table>
                         </div>
                       </div>
                       <div class="footer">
