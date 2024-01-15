@@ -371,16 +371,8 @@ function CreaActivo() {
                     <div className="certificado">
                       <div className="header">CERTIFICADO GENERADO</div>
                       <div className="body">
-                        <div className="message">{message}
-                        <th>{message.tipoIndicador}</th>
-                        <th>{message.nombre}</th>
-                        <th>{message.areaImpacto}</th>
-                        <th>{message.latitud}</th>
-                        <th>{message.longitud}</th>
-                        <th>{message.beneficiarios}</th>
-                        <th>{message.acciones}</th>
-                        <th>{message.impacto}</th>
-                        <th>{message.responsables}</th>
+                        <div className="message">
+                        
                         <th>{message.hashresult}</th>
                         
 
