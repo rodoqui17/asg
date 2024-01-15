@@ -8,6 +8,7 @@ import axios from 'axios';
 const baseURL = "https://r3colectaback.herokuapp.com/asg/asg";
 function Activos() {
     const [respuestas, setRespuestas] = useState([]);
+    useEffect(() => {
     axios
         //.post(baseURL,datosJSON)
         .get(baseURL)
@@ -20,7 +21,7 @@ function Activos() {
             console.log(error);
         });
 
-
+    }, []);
 // const [user, setUser] = useState(null)
 const auth = useAuth();
 // const navigate = useNavigate();
