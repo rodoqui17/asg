@@ -71,16 +71,16 @@ function CreaActivo() {
       });
       //actualizar los campos de referencia en base a los siguientes campos
       const datosJSON = {
-        tipoIndicador: req.body.tipoIndicador,
-        nombre: req.body.nombre,
-        descripcion: req.body.descripcion,
-        areaImpacto: req.body.areaImpacto,
-        latitud: req.body.latitud,
-        longitud: req.body.longitud,
-        beneficiarios: [req.body.beneficiarios],
-        accionesImplementadas: [req.body.accionesImplementadas],
-        impactoSocial: req.body.impactoSocial,
-        responsableParticipacion: req.body.responsableParticipacion,
+        tipoIndicador: {lote},
+        nombre: {lote},
+        descripcion: {lote},
+        areaImpacto: {lote},
+        latitud: {lote},
+        longitud: {lote},
+        beneficiarios: {lote},
+        accionesImplementadas: {lote},
+        impactoSocial: {lote},
+        responsableParticipacion: {lote},
       };
       axios
         // .post(baseURL,datosJSON)
