@@ -77,13 +77,13 @@ function CreaActivo() {
             responsableParticipacion: responsables.current.value,
           };
 
-          setMessage({ data: datosJSON, hashresult: hash })
+          setMessage(hash)
 
           axios
             //.post(baseURL,datosJSON)
             .get(baseURL)
             .then((response) => {
-              setPost(JSON.stringify(response.data.message));
+              setPost(response.data.message);
               console.log(response.data);
               console.log(hash);
             })
@@ -372,7 +372,19 @@ function CreaActivo() {
                       <div className="header">CERTIFICADO GENERADO</div>
                       <div className="body">
                         <div className="message">
-                          <td>{message.data}</td>
+                        <tbody>
+                            {post.map((fila, index) => (
+                                <tr key={index}>
+                                    <td>{fila.tipoIndicador}</td>
+                                    <td>{fila.nombre}</td>
+                                    <td>{fila.impactoSocial}</td>
+                                    <td>{fila.areaImpacto}</td>
+                                    <td>
+                                        <a href={fila.enlace}>{fila.responsableParticipacion}</a> empresa responsable
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
                          
                         </div>
                       </div>
