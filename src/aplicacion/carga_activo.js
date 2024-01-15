@@ -20,7 +20,7 @@ function CreaActivo() {
   const acciones = useRef(null);
   const impacto = useRef(null);
   const responsables = useRef(null);
-
+  const [respuestas, setRespuestas] = useState([]);
   function calculateSHA256(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -83,7 +83,7 @@ function CreaActivo() {
             //.post(baseURL,datosJSON)
             .get(baseURL)
             .then((response) => {
-              setPost(response.data.message);
+              setRespuestas(response.data.message);
               console.log(response.data);
               console.log(hash);
             })
@@ -373,7 +373,7 @@ function CreaActivo() {
                       <div className="body">
                         <div className="message">
                         <tbody>
-                            {post.map((fila, index) => (
+                            {respuestas.map((fila, index) => (
                                 <tr key={index}>
                                     <td>{fila.tipoIndicador}</td>
                                     <td>{fila.nombre}</td>
