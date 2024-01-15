@@ -71,20 +71,20 @@ function CreaActivo() {
       });
       //actualizar los campos de referencia en base a los siguientes campos
       const datosJSON = {
-        tipoIndicador: {lote},
-        nombre: {lote},
-        descripcion: {lote},
-        areaImpacto: {lote},
-        latitud: {lote},
-        longitud: {lote},
-        beneficiarios: {lote},
-        accionesImplementadas: {lote},
-        impactoSocial: {lote},
-        responsableParticipacion: {lote},
+        tipoIndicador: lote.current.value,
+        nombre: cantidad.current.value,
+        descripcion: peso.current.value,
+        areaImpacto: tipo_material.current.value,
+        latitud: color.current.value,
+        longitud: actividad.current.value,
+        beneficiarios: lote.current.value,
+        accionesImplementadas: lote.current.value,
+        impactoSocial: lote.current.value,
+        responsableParticipacion: lote.current.value,
       };
       axios
-        // .post(baseURL,datosJSON)
-        .get(baseURL)
+        .post(baseURL,datosJSON)
+        //.get(baseURL)
         .then((response) => {
           setPost(JSON.stringify(response.data));
           console.log(response.data);
