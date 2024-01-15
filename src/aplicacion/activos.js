@@ -45,10 +45,10 @@ function Activos() {
                             {respuestas.map((fila, index) => (
                                 <tr key={index}>
                                     <td>{fila.tipoIndicador}</td>
-                                    <td>{fila.tipoMaterial}</td>
-                                    <td>{fila.peso}</td>
-                                    <td>{fila.valor}</td>
-                                    <td><a href={fila.enlace}>{fila.certificado}</a></td>
+                                    <td>{fila.nombre}</td>
+                                    <td>{fila.impactoSocial}</td>
+                                    <td>{fila.areaImpacto}</td>
+                                    <td><a href={fila.enlace}>{fila.responsableParticipacion}</a> empresa responsable</td>
                                     {/* Agrega más celdas según sea necesario */}
                                 </tr>
                             ))}
