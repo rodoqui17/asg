@@ -373,37 +373,8 @@ function CreaActivo() {
                         <div className="message">
                           <Container style={{ padding: "20px" }}>
                             <header className="App-title mb-4">
-                              <h2>Activos Ambientales</h2>
+                              <h3>{message}</h3>
                             </header>
-                            <section className="mb-2">
-                              <Table striped bordered hover>
-                                <thead>
-                                  <tr>
-                                    <th style={{ width: '10%' }}>Indicador</th>
-                                    <th style={{ width: '20%' }}>Nombre</th>
-                                    <th style={{ width: '20%' }}>Impacto Social</th>
-                                    <th style={{ width: '20%' }}>Área de Impacto</th>
-                                    <th style={{ width: '30%' }}>Certificado</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {Object.values(respuestas).map((fila, index) => (
-                                    <tr key={index}>
-                                      <td>{fila.tipoIndicador}</td>
-                                      <td>{fila.nombre}</td>
-                                      <td>{fila.impactoSocial}</td>
-                                      <td>{fila.areaImpacto}</td>
-                                      <td>
-                                        <a href={fila.enlace}>{fila.responsableParticipacion}</a> empresa responsable
-                                      </td>
-                                    </tr>
-                                  ))}
-                                </tbody>
-                              </Table>
-                            </section>
-                            <div class="footer">
-                              {message}
-                            </div>
                           </Container>
                         </div>
                       </div>
