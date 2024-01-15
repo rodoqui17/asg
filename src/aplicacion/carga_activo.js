@@ -84,7 +84,7 @@ function CreaActivo() {
             //.post(baseURL,datosJSON)
             .get(baseURL)
             .then((response) => {
-              setPost(JSON.stringify(response.data.message));
+              setPost(JSON.stringify(response.data));
               console.log(response.data);
 
               console.log(hash);
@@ -373,9 +373,11 @@ function CreaActivo() {
                 <Card border="primary" style={{ width: "auto", height: "auto" }}>
                   <div className="bodycert">
                     <div className="certificado">
-                      <div className="header">CERTIFICADO GENERADO</div>
+                      <div className="header">CERTIFICADO</div>
                       <div className="body">
-                        <p>{message}</p>
+                        <h3>{message}</h3>
+                        <p>{post}</p>
+                        <p>{respuestas}</p>
                       </div>
                     </div>
                   </div>
