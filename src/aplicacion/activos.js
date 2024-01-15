@@ -4,16 +4,17 @@ import { useAuth } from "../auth/auth";
 import NAVEGATION from "./navegation";
 import axios from 'axios';
 // import {useNavigate} from 'react-router-dom';
-const [respuestas, setRespuestas] = useState([]);
+
 const baseURL = "https://r3colectaback.herokuapp.com/asg/asg";
 function Activos() {
+    const [respuestas, setRespuestas] = useState([]);
     axios
         //.post(baseURL,datosJSON)
         .get(baseURL)
         .then((response) => {
             setRespuestas(JSON.stringify(response.data.message));
             console.log(response.data);
-            console.log(hash);
+            
         })
         .catch((error) => {
             console.log(error);
