@@ -372,6 +372,7 @@ function CreaActivo() {
                       <div className="header">CERTIFICADO GENERADO</div>
                       <div className="body">
                         <div className="message">
+                          {message}
                           <tbody>
                             {datosJSON.map((fila, index) => (
                               <tr key={index}>
