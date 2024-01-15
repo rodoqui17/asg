@@ -83,7 +83,7 @@ function CreaActivo() {
             //.post(baseURL,datosJSON)
             .get(baseURL)
             .then((response) => {
-              setPost(response.data.message);
+              setPost(JSON.stringify(response.data.message));
               console.log(response.data);
               console.log(hash);
             })
