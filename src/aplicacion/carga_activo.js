@@ -39,28 +39,37 @@ function CreaActivo() {
 
 
 
-async function send() {
+function send() {
     if (
       tipoIndicador.current.value !== "" &&
       nombre.current.value !== "" &&
       inputfile.current.value !== ""
     ) {
 
-      
-    const hashresult =  await calculateSHA256(inputfile.current.files[0]).then((hash) => {
-       
-        Swal.fire({
-          title: "REGISTRO GENERADO",
-          text: hash,
-          icon: "success",
-          confirmButtonText: "Aceptar",
-        });
-        return hash;
-        setMessage(hash);
-      });
-      //devuelve el hash generado de la funcion
-      console.log(message);
-      console.log(hashresult)
+ async function obtenerHash() {
+  try {
+    const hash = await calculateSHA256(inputfile.current.files[0]);
+    
+    Swal.fire({
+      title: "REGISTRO GENERADO",
+      text: hash,
+      icon: "success",
+      confirmButtonText: "Aceptar",
+    });
+
+    setMessage(hash);
+
+    // Ahora hash contiene el valor resuelto de la promesa
+    console.log(hash);
+    return hash;
+  } catch (error) {
+    console.error('Error al calcular el hash:', error);
+  }
+}
+
+// Llamada a la función asincrónica
+obtenerHash();
+console.log(message);      
       const datosJSON = {
         tipoIndicador: tipoIndicador.current.value,
         nombre: nombre.current.value,
