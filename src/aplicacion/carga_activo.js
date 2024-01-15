@@ -372,7 +372,7 @@ function CreaActivo() {
                 <Card border="primary" style={{ width: "auto", height: "auto" }}>
                   <div className="bodycert">
                     <div className="certificado">
-                      <div className="header">CERTIFICADO</div>
+                      <div className="header">CERTIFICADO EMITIDO</div>
                       <div className="body">
                         <h5>{message}</h5>
                         <p style={{ overflowWrap: 'break-word' }}>{post}</p>
