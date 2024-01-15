@@ -3,7 +3,7 @@ import { Container, Button, Row, Col, Card } from "react-bootstrap";
 import Swal from "sweetalert2";
 import NAVEGATION from "./navegation";
 import axios from "axios";
-import "../../App.css"
+import "../App.css"
 const CryptoJS = require("crypto-js");
 const baseURL = "https://r3colectaback.herokuapp.com/asg/asg";
 function CreaActivo() {
