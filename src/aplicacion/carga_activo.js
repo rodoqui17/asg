@@ -81,6 +81,7 @@ function send() {
         .then((response) => {
           setPost(JSON.stringify(response.data));
           console.log(response.data);
+          console.log(hash);
         })
         .catch((error) => {
           console.log(error);
