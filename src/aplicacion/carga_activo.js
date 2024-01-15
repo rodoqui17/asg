@@ -78,16 +78,15 @@ function CreaActivo() {
           };
 
           setMessage(hash);
-          setRespuestas(JSON.stringify(datosJSON));
-          console.log(respuestas)
+          setRespuestas(datosJSON);
+         
           axios
             //.post(baseURL,datosJSON)
             .get(baseURL)
             .then((response) => {
               setPost(JSON.stringify(response.data.message));
               console.log(response.data);
-              setRespuestas(response.data.message);
-              console.log(respuestas);
+              
               console.log(hash);
             })
             .catch((error) => {
@@ -376,7 +375,7 @@ function CreaActivo() {
                       <div className="body">
                         <div className="message">
                         <tbody>
-                            {respuestas.map((fila, index) => (
+                            {Object.values(respuestas).map((fila, index) => (
                                 <tr key={index}>
                                     <td>{fila.tipoIndicador}</td>
                                     <td>{fila.nombre}</td>
