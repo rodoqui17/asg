@@ -370,13 +370,7 @@ function CreaActivo() {
                     <div className="certificado">
                       <div className="header">CERTIFICADO GENERADO</div>
                       <div className="body">
-                        <div className="message">
-                          <Container style={{ padding: "20px" }}>
-                            <header className="App-title mb-4">
-                              <h3>{message}</h3>
-                            </header>
-                          </Container>
-                        </div>
+                        <p>{message}</p>
                       </div>
 
                     </div>
