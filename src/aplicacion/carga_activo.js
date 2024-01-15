@@ -78,7 +78,7 @@ function CreaActivo() {
           };
 
           setMessage(hash);
-          setRespuestas(datosJSON);
+          setRespuestas(JSON.stringify(datosJSON));
           axios
             //.post(baseURL,datosJSON)
             .get(baseURL)
