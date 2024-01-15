@@ -374,17 +374,14 @@ function CreaActivo() {
                         <div className="message">
                           {message}
                           <tbody>
-                            {datosJSON.map((fila, index) => (
-                              <tr key={index}>
-                                <td>{fila.tipoIndicador}</td>
-                                <td>{fila.nombre}</td>
-                                <td>{fila.impactoSocial}</td>
-                                <td>{fila.areaImpacto}</td>
-                                <td>
-                                  <a href={fila.enlace}>{fila.responsableParticipacion}</a> empresa responsable
-                                </td>
-                              </tr>
-                            ))}
+                            <tr>
+                              <td>{message}</td>
+                              
+                              <td>
+                                <a href={fila.enlace}>{fila.responsableParticipacion}</a> empresa responsable
+                              </td>
+                            </tr>
+
                           </tbody>
                           <Card.Body>
                             <Card.Text style={{ color: "#2043b6" }}>{message.hashresult}</Card.Text>
