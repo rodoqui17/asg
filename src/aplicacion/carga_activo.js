@@ -20,7 +20,7 @@ function CreaActivo() {
   const acciones = useRef(null);
   const impacto = useRef(null);
   const responsables = useRef(null);
-  const [respuestas, setRespuestas] = useState([]);
+  const [respuestas, setRespuestas] = useState();
   function calculateSHA256(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
