@@ -7,35 +7,6 @@ import axios from 'axios';
 
 
 function Activos() {
-
-    const DatosLista = ({ datos }) => {
-  const [respuestas, setRespuestas] = useState([]);
-
-  useEffect(() => {
-    // Función asincrónica para manejar las solicitudes Axios
-    const realizarSolicitudes = async () => {
-      try {
-        // Mapea el array de datos y realiza una solicitud Axios por cada elemento
-        const solicitudes = datos.map(async (dato) => {
-          // Ejemplo de solicitud Axios
-          const respuesta = await axios.get(`https://api.example.com/${dato}`);
-          return respuesta.data;
-        });
-
-        // Espera a que todas las solicitudes se completen
-        const resultados = await Promise.all(solicitudes);
-
-        // Actualiza el estado con los resultados
-        setRespuestas(resultados);
-      } catch (error) {
-        console.error('Error al realizar solicitudes:', error);
-      }
-    };
-
-    // Llama a la función para realizar las solicitudes cuando el componente se monta
-    realizarSolicitudes();
-  }, [datos]); // Asegúrate de incluir "datos" como una dependencia para que se vuelva a ejecutar cuando cambie
-
         
     // const [user, setUser] = useState(null)
      const auth = useAuth();
@@ -59,12 +30,7 @@ function Activos() {
 
                 >
 
-                    <h2>Respuestas de Axios</h2>
-      <ul>
-        {respuestas.map((respuesta, index) => (
-          <li key={index}>{respuesta}</li>
-        ))}
-      </ul>
+    
                     <h2>CERTIFICADOS CREADOS {auth.user}</h2>
                 </header>
                 <section
