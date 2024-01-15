@@ -26,8 +26,8 @@ function Navegation() {
                         <Nav className="me-auto">
                             {/* <Nav.Link href="/panel">Operaciones <FaCloudsmith />   </Nav.Link> */}
                             {/* <Nav.Link href="#consultas">Consultas <FaSistrix /> </Nav.Link> */}
+                            <Nav.Link href="/activos">Certificado Emitidos <FaTachometerAlt /></Nav.Link>
                             <Nav.Link href="/validar">Validar Certificado <FaFingerprint /></Nav.Link>
-                            <Nav.Link href="/activos">Activos <FaTachometerAlt /></Nav.Link>
                             <Nav.Link href="/nuevoactivo"> Nuevo Certificado <FaFolderPlus /></Nav.Link>
 
                         </Nav>
