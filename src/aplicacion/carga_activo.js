@@ -73,7 +73,7 @@ function send() {
         beneficiarios: beneficiarios.current.value,
         accionesImplementadas: acciones.current.value,
         impactoSocial: impacto.current.value,
-        responsableParticipacion: responsables.current.value,
+        responsableParticipacion: hash,
       };
       axios
         //.post(baseURL,datosJSON)

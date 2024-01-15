@@ -35,9 +35,9 @@ function Activos() {
                         <thead>
                             <tr>
                                 <th>Indicador</th>
-                                <th>Material</th>
-                                <th>Peso</th>
-                                <th>Valor</th>
+                                <th>Nombre </th>
+                                <th>Impacto Social</th>
+                                <th>Area de Impacto</th>
                                 <th>Certificado</th>
                             </tr>
                         </thead>
