@@ -36,26 +36,7 @@ function CreaActivo() {
   }
   // Ejemplo de uso
 
-  React.useEffect(() => {
-    // const datosJSON = {
-    //     nombre: lote.current.value,
-    //     apellido: cantidad.current.value,
-    //     fecha_nac: "17/01/1983",
-    //     telefono: "72565853",
-    //     email: "quiroz.rodrigo@gmail.com",
-    //     ciudad: "La Paz",
-    //     nacionalidad: "Boliviano",
-    //     nft: "MarteID",
-    //     genero: "1",
-    //     temainteres: "espacial",
-    //     ocupacion: "Estudiante",
-    //     contract: message,
-    //   };
-  }, []);
 
-  //   if (!post) return null;
-
-  // let nombreArchivo = hash + ".json";
 
   function send() {
     if (
@@ -262,7 +243,7 @@ function CreaActivo() {
                   border="primary"
                   style={{ width: "auto", height: "120px" }}
                 >
-                  <Card.Header as="h3" style={{ color: "#2043b6" }}>
+                  <Card.Header as="h6" style={{ color: "#2043b6" }}>
                     Acciones Implementadas
                   </Card.Header>
                   <Card.Body>
