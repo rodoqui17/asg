@@ -5,7 +5,7 @@ import NAVEGATION from "./navegation";
 import axios from "axios";
 import "../App.css"
 const CryptoJS = require("crypto-js");
-const baseURL = "https://r3colectaback.herokuapp.com/asg/newasg";
+const baseURL = "https://r3colectaback.herokuapp.com/asg/asg";
 function CreaActivo() {
   const [message, setMessage] = useState("");
   const [post, setPost] = React.useState(null);
