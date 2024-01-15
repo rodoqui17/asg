@@ -41,8 +41,8 @@ function CreaActivo() {
 
   function send() {
     if (
-      tipoindicador.current.value !== "" &&
-      lote.current.value !== "" &&
+      tipoIndicador.current.value !== "" &&
+      nombre.current.value !== "" &&
       inputfile.current.value !== ""
     ) {
       calculateSHA256(inputfile.current.files[0]).then((hash) => {
