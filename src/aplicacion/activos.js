@@ -54,38 +54,19 @@ function Activos() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>224</td>
-                                <td>PET</td>
-                                <td>20 Tn</td>
-                                <td>800 Bs.</td>
-                                <td> <a href="/link">Enlace</a> </td>
-                         
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Llantas</td>
-                                <td>20 Tn</td>
-                                <td>300 Bs.</td>
-                                <td> <a href="/link">Enlace</a> </td>
-                             
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Llantas</td>
-                                <td>20 Tn</td>
-                                <td>250 Bs.</td>
-                                <td> <a href="/link">Enlace</a> </td>
-                            
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Aceite</td>
-                                <td>100 Lt</td>
-                                <td>300 Bs.</td>
-                                <td><a href="/link">Enlace</a> </td>
-                               
-                            </tr>
+                              <tbody>
+        {datos.map((fila, index) => (
+          <tr key={index}>
+            <td>{fila.columna1}</td>
+            <td>{fila.columna2}</td>
+            <td>{fila.columna1}</td>
+            <td>{fila.columna2}</td>
+            <td> <a href="/link">Enlace</a> </td>
+                    {/* Agrega más celdas según sea necesario */}
+                  </tr>
+                ))}
+                      </tbody>
+              
                         </tbody>
                     </Table>
                 </section>
