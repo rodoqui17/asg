@@ -13,6 +13,8 @@ import NAVEGATION from "./navegation";
 import axios from "axios";
 import "../App.css";
 import logo from "../assets/logo_circular.png";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 const CryptoJS = require("crypto-js");
 const baseURL = "https://r3colectaback.herokuapp.com/asg/newasg";
 //const baseURL = "http://localhost:3500/asg/newasg";
@@ -26,6 +28,7 @@ function CreaActivo() {
   const [_beneficiarios, setBeneficiarios] = useState("");
   const [_descripcion, SetDescripcion] = useState("");
   const [_areaimpacto, setAreaImpacto] = useState("");
+  const [respuestas, setRespuestas] = useState([]);
   // const [message, setMessage] = useState("");
   // const [message, setMessage] = useState("");
   // const [message, setMessage] = useState("");
@@ -45,8 +48,8 @@ function CreaActivo() {
   const acciones = useRef(null);
   const impacto = useRef(null);
   const responsables = useRef(null);
-  const [respuestas, setRespuestas] = useState([]);
 
+  const dropdownRef = useRef(null);
   //FUNCIONES
   function calculateSHA256(file) {
     return new Promise((resolve, reject) => {
@@ -64,14 +67,24 @@ function CreaActivo() {
     });
   }
 
-  //dropdown
-  const handleDropdownSelect = (eventKey) => {
-    setSelectedOption(eventKey);
-  };
-
   //funcion para descargar el certificado
   const handleDownloadPDF = () => {
-    console.log("descargar");
+    const content = dropdownRef.current;
+
+    html2canvas(content).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF({
+        orientation: "landscape", // o 'landscape' portrait
+        unit: "mm",
+        format: "letter",
+      });
+
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save("certificado.pdf");
+    });
   };
 
   //funcion para enviar el certificado
@@ -450,6 +463,7 @@ function CreaActivo() {
                   </Card.Body>
                 </Card> */}
                 <Card
+                  ref={dropdownRef}
                   border="primary"
                   style={{
                     width: "auto",
@@ -537,18 +551,21 @@ function CreaActivo() {
                       </div>
                     </div>
                   </div>
-
-                  <Col
-                    xs={12}
-                    md={12}
-                    s={{ order: 1 }}
-                    style={{ padding: "30px", textAlign: "center" }}
-                  >
-                    <Button variant="primary" onClick={handleDownloadPDF}>
-                      Descargar Certificado
-                    </Button>{" "}
-                  </Col>
                 </Card>
+                <Col
+                  xs={12}
+                  md={12}
+                  s={{ order: 1 }}
+                  style={{
+                    padding: "30px",
+                    textAlign: "center",
+                    visibility: `${visible}`,
+                  }}
+                >
+                  <Button variant="primary" onClick={handleDownloadPDF}>
+                    Descargar Certificado
+                  </Button>{" "}
+                </Col>
                 {/* <Card className="certificado-card" border="primary">
                   <div className="bodycert">
                     <div className="certificado">
