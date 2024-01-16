@@ -49,7 +49,7 @@ function Activos() {
                                     <td>{fila.impactoSocial}</td>
                                     <td>{fila.areaImpacto}</td>
                                     <td>
-                                        <a href={fila.enlace}>{fila.responsableParticipacion}</a>                                     </td>
+                                        <a href={fila.enlace}>{fila.identificador}</a>                                     </td>
                                 </tr>
                             ))}
                         </tbody>
