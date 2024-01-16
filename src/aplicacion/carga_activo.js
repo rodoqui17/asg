@@ -250,7 +250,7 @@ function CreaActivo() {
                   style={{ width: "auto", height: "120px" }}
                 >
                   <Card.Header as="h3" style={{ color: "#2043b6" }}>
-                    Tipo Iniciativa
+                    Indicador
                   </Card.Header>
                   <Card.Body>
                     <div className="input-group">
@@ -270,14 +270,14 @@ function CreaActivo() {
                   style={{ width: "auto", height: "120px" }}
                 >
                   <Card.Header as="h3" style={{ color: "#2043b6" }}>
-                    Nombre
+                    Iniciativa
                   </Card.Header>
                   <Card.Body>
                     <div className="input-group">
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Nombre del proyecto"
+                        placeholder="Nombre de la iniciativa"
                         ref={nombre}
                       />
                     </div>
