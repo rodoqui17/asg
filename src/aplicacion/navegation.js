@@ -31,9 +31,9 @@ function Navegation() {
                             <Nav.Link href="/nuevoactivo"> Nuevo Certificado <FaFolderPlus /></Nav.Link>
 
                         </Nav>
-                        <Navbar.Text>
+                        {/* <Navbar.Text>
                             <a href="/">Cerrar </a>
-                        </Navbar.Text>
+                        </Navbar.Text> */}
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
