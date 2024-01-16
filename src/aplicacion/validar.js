@@ -63,7 +63,7 @@ function Validar() {
           // setChecksumValue(text);
           Swal.fire({
             title: "Certificado Valido",
-            text: "El Certificado ha sido generado por R3COLECA",
+            text: "El Certificado generado por R3COLECA",
             icon: "success",
             confirmButtonText: "Aceptar",
           });
