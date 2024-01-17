@@ -6,7 +6,7 @@ import {
   Col,
   Card,
   Dropdown,
-  selectedOption,
+  Form,
 } from "react-bootstrap";
 import Swal from "sweetalert2";
 import NAVEGATION from "./navegation";
@@ -15,6 +15,8 @@ import "../App.css";
 import logo from "../assets/logo_circular.png";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 const CryptoJS = require("crypto-js");
 const baseURL = "https://r3colectaback.herokuapp.com/asg/newasg";
 //const baseURL = "http://localhost:3500/asg/newasg";
@@ -25,10 +27,25 @@ function CreaActivo() {
   const [_tipoIndicador, setTipoIndicador] = useState("");
   const [_nombre, setNombre] = useState("");
   const [_impacto, SetImpacto] = useState("");
-  const [_beneficiarios, setBeneficiarios] = useState("");
+  // const [_beneficiarios, setBeneficiarios] = useState("");
   const [_descripcion, SetDescripcion] = useState("");
   const [_areaimpacto, setAreaImpacto] = useState("");
   const [respuestas, setRespuestas] = useState([]);
+  const [selectedIndicator, setSelectedIndicator] = useState("");
+  const [iniciativas, setIniciativas] = useState([]);
+  const [nuevoBeneficiario, setnuevoBeneficario] = useState("");
+
+  const handleNombreChange = (e) => {
+    setnuevoBeneficario(e.target.value);
+  };
+
+  const handleAgregarBeneficiario = () => {
+    if (nuevoBeneficiario.trim() !== "") {
+      setIniciativas([...iniciativas, nuevoBeneficiario]);
+      setnuevoBeneficario("");
+    }
+  };
+
   // const [message, setMessage] = useState("");
   // const [message, setMessage] = useState("");
   // const [message, setMessage] = useState("");
@@ -51,6 +68,12 @@ function CreaActivo() {
 
   const dropdownRef = useRef(null);
   //FUNCIONES
+
+  // Manejar cambios en la selección
+  const handleSelectChange = (event) => {
+    setSelectedIndicator(event.target.value);
+  };
+
   function calculateSHA256(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -90,14 +113,14 @@ function CreaActivo() {
   //funcion para enviar el certificado
   function send() {
     if (
-      tipoIndicador.current.value !== "" &&
+      selectedIndicator !== "" &&
       nombre.current.value !== "" &&
       inputfile.current.value !== "" &&
       descripcion.current.value !== "" &&
       areaimpacto.current.value !== "" &&
       latitud.current.value !== "" &&
       longitud.current.value !== "" &&
-      beneficiarios.current.value !== "" &&
+      beneficiarios !== "" &&
       acciones.current.value !== "" &&
       impacto.current.value !== "" &&
       responsables.current.value !== ""
@@ -120,13 +143,13 @@ function CreaActivo() {
 
           // Enviamos el POST para el registro
           const datosJSON = {
-            tipoIndicador: tipoIndicador.current.value,
+            tipoIndicador: selectedIndicator,
             nombre: nombre.current.value,
             descripcion: descripcion.current.value,
             areaImpacto: areaimpacto.current.value,
             latitud: latitud.current.value,
             longitud: longitud.current.value,
-            beneficiarios: beneficiarios.current.value,
+            beneficiarios: iniciativas,
             accionesImplementadas: acciones.current.value,
             impactoSocial: impacto.current.value,
             responsableParticipacion: responsables.current.value,
@@ -144,7 +167,7 @@ function CreaActivo() {
               setTipoIndicador(response.data.tipoIndicador);
               setNombre(response.data.nombre);
               SetImpacto(response.data.impactoSocial);
-              setBeneficiarios(response.data.beneficiarios);
+              setnuevoBeneficario(response.data.beneficiarios);
               SetDescripcion(response.data.descripcion);
               setAreaImpacto(response.data.areaImpacto);
               setVisible("visible");
@@ -212,39 +235,34 @@ function CreaActivo() {
                   </Card.Body>
                 </Card>
               </Col>
-              {/* <Col xs={12} md={4} s={{ order: 1 }} style={{ padding: "10px" }}>
+              <Col xs={12} md={12} s={{ order: 1 }} style={{ padding: "10px" }}>
                 <Card>
                   <Card.Header as="h3" style={{ color: "#2043b6" }}>
-                    Indicador
+                    Selecciona un indicador
                   </Card.Header>
                   <Card.Body>
-                    <Dropdown
-                      onSelect={handleDropdownSelect}
-                      ref={tipoIndicador}
-                    >
-                      <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                        {selectedOption || "Selecciona..."}
-                      </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item eventKey="opcion1">
-                          Opción 1
-                        </Dropdown.Item>
-                        <Dropdown.Item eventKey="opcion2">
-                          Opción 2
-                        </Dropdown.Item>
-                        <Dropdown.Item eventKey="opcion3">
-                          Opción 3
-                        </Dropdown.Item>
-                      </Dropdown.Menu>
+                    <Dropdown>
+                      <select
+                        id="indicators"
+                        value={selectedIndicator}
+                        onChange={handleSelectChange}
+                      >
+                        <option value="">Indicadores</option>
+                        <option value="Cantidad de residuos reciclados">
+                          Cantidad de residuos reciclados
+                        </option>
+                        <option value="Desarrollo de Hábitats Naturales">
+                          Desarrollo de Hábitats Naturales
+                        </option>
+                        <option value="Participación en Iniciativas de RSC">
+                          Participación en Iniciativas de RSC
+                        </option>
+                      </select>
                     </Dropdown>
-
-                    {selectedOption && (
-                      <p>Has seleccionado: {selectedOption}</p>
-                    )}
                   </Card.Body>
                 </Card>
-              </Col> */}
-              <Col xs={12} md={4} s={{ order: 1 }} style={{ padding: "10px" }}>
+              </Col>
+              {/* <Col xs={12} md={4} s={{ order: 1 }} style={{ padding: "10px" }}>
                 <Card
                   border="primary"
                   style={{ width: "auto", height: "120px" }}
@@ -252,6 +270,7 @@ function CreaActivo() {
                   <Card.Header as="h3" style={{ color: "#2043b6" }}>
                     Indicador
                   </Card.Header>
+
                   <Card.Body>
                     <div className="input-group">
                       <input
@@ -263,7 +282,7 @@ function CreaActivo() {
                     </div>
                   </Card.Body>
                 </Card>
-              </Col>
+              </Col> */}
               <Col xs={12} md={4} s={{ order: 1 }} style={{ padding: "10px" }}>
                 <Card
                   border="primary"
@@ -367,20 +386,45 @@ function CreaActivo() {
               <Col xs={12} md={4} s={{ order: 1 }} style={{ padding: "10px" }}>
                 <Card
                   border="primary"
-                  style={{ width: "auto", height: "120px" }}
+                  style={{ width: "auto", height: "auto" }}
                 >
                   <Card.Header as="h3" style={{ color: "#2043b6" }}>
                     Beneficiarios
                   </Card.Header>
                   <Card.Body>
-                    <div className="input-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Beneficiarios"
-                        ref={beneficiarios}
-                      />
-                    </div>
+                    <Form>
+                      <Form.Group controlId="nombreIniciativa">
+                        <Form.Control
+                          type="text"
+                          placeholder="Grupos beneficiarios"
+                          value={nuevoBeneficiario}
+                          onChange={handleNombreChange}
+                        />
+                        <Button
+                          variant="primary"
+                          onClick={handleAgregarBeneficiario}
+                          style={{
+                            marginLeft: "10px",
+                            marginTop: "10px",
+                            marginBottom: "10px",
+                            height: "auto",
+                            width: "190px",
+                            backgroundColor: "#2043b6",
+                            textAlign: "center",
+                          }}
+                        >
+                          Agregar
+                          {/* <FontAwesomeIcon icon={faPlus} /> */}
+                        </Button>
+                        <div>
+                          <ul>
+                            {iniciativas.map((iniciativa, index) => (
+                              <li key={index}>{iniciativa}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </Form.Group>
+                    </Form>
                   </Card.Body>
                 </Card>
               </Col>
@@ -518,7 +562,14 @@ function CreaActivo() {
                             paddingTop: "20px",
                           }}
                         >
-                          <strong>Beneficiarios :</strong> {_beneficiarios}
+                          <strong>Beneficiarios :</strong>
+                          <div>
+                            <ul>
+                              {iniciativas.map((iniciativa, index) => (
+                                <li key={index}>{iniciativa}</li>
+                              ))}
+                            </ul>
+                          </div>
                         </h5>
                         <h5
                           style={{
