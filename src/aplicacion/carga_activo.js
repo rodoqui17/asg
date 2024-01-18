@@ -624,7 +624,7 @@ if (
                             paddingTop: "20px",
                           }}
                         >
-                          <strong>Nombre :</strong> {_nombre}
+                          <strong>Iniciativa :</strong> {_nombre}
                         </h5>
                         <h5
                           style={{
