@@ -18,8 +18,8 @@ import html2canvas from "html2canvas";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 const CryptoJS = require("crypto-js");
-const baseURL = "https://r3colectaback.herokuapp.com/asg/newasg";
-//const baseURL = "http://localhost:3500/asg/newasg";
+//const baseURL = "https://r3colectaback.herokuapp.com/asg/newasg";
+const baseURL = "http://localhost:3500/asg/newasg";
 function CreaActivo() {
   //STATES
   const [message, setMessage] = useState("");
@@ -33,8 +33,13 @@ function CreaActivo() {
   const [respuestas, setRespuestas] = useState([]);
   const [selectedIndicator, setSelectedIndicator] = useState("");
   const [iniciativas, setIniciativas] = useState([]);
+  const [accion, setAcciones] = useState([]);
   const [nuevoBeneficiario, setnuevoBeneficario] = useState("");
+  const [nuevaAccion, setnuevaAccion] = useState("");
+  const [file, setFile] = useState("");
 
+
+  
   const handleNombreChange = (e) => {
     setnuevoBeneficario(e.target.value);
   };
@@ -46,6 +51,15 @@ function CreaActivo() {
     }
   };
 
+  const handleaccionChange = (e) => {
+    setnuevaAccion(e.target.value);
+  };
+  const handleAgregarAcciones = () => {
+    if (nuevaAccion.trim() !== "") {
+      setAcciones([...accion, nuevaAccion]);
+      setnuevaAccion("");
+    }
+  };
   // const [message, setMessage] = useState("");
   // const [message, setMessage] = useState("");
   // const [message, setMessage] = useState("");
@@ -99,7 +113,7 @@ function CreaActivo() {
       const pdf = new jsPDF({
         orientation: "landscape", // o 'landscape' portrait
         unit: "mm",
-        format: "letter",
+        format: "A4",
       });
 
       const pdfWidth = pdf.internal.pageSize.getWidth();
@@ -112,19 +126,35 @@ function CreaActivo() {
 
   //funcion para enviar el certificado
   function send() {
-    if (
-      selectedIndicator !== "" &&
-      nombre.current.value !== "" &&
-      inputfile.current.value !== "" &&
-      descripcion.current.value !== "" &&
-      areaimpacto.current.value !== "" &&
-      latitud.current.value !== "" &&
-      longitud.current.value !== "" &&
-      beneficiarios !== "" &&
-      acciones.current.value !== "" &&
-      impacto.current.value !== "" &&
-      responsables.current.value !== ""
-    ) {
+
+
+const latitudeRegex = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/;
+const longitudeRegex = /^[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/;
+const fileNameRegex = /^[^\\]*[\\]?([^\\]+)$/;  // Expresión regular para extraer el nombre del archivo desde la ruta
+
+// Usa la expresión regular para extraer el nombre del archivo desde la ruta
+const inputFilePath = inputfile.current.value;
+console.log(inputFilePath);
+
+// Extraer el nombre del archivo desde la ruta, teniendo en cuenta "fakepath"
+const fileNameMatch = /([^\\]+)$/.exec(inputFilePath);
+const fileName = fileNameMatch ? fileNameMatch[1] : "";
+console.log(fileName);
+if (
+  selectedIndicator !== "" &&
+  nombre.current.value !== "" &&
+  inputfile.current.value !== "" &&
+  descripcion.current.value !== "" &&
+  areaimpacto.current.value !== "" &&
+  latitud.current.value !== "" &&
+  latitudeRegex.test(latitud.current.value) &&  // Validate latitude format
+  longitud.current.value !== "" &&
+  longitudeRegex.test(longitud.current.value) &&  // Validate longitude format
+  iniciativas.length !== 0 &&
+  acciones.length !== "" &&
+  impacto.current.value !== "" &&
+  responsables.current.value !== ""
+) {
       async function obtenerHash() {
         try {
           const hash = await calculateSHA256(inputfile.current.files[0]);
@@ -150,10 +180,12 @@ function CreaActivo() {
             latitud: latitud.current.value,
             longitud: longitud.current.value,
             beneficiarios: iniciativas,
-            accionesImplementadas: acciones.current.value,
+            accionesImplementadas: accion,
             impactoSocial: impacto.current.value,
             responsableParticipacion: responsables.current.value,
             identificador: hash,
+            file: fileName,
+            
           };
 
           setMessage(hash);
@@ -170,6 +202,7 @@ function CreaActivo() {
               setnuevoBeneficario(response.data.beneficiarios);
               SetDescripcion(response.data.descripcion);
               setAreaImpacto(response.data.areaImpacto);
+              setFile(fileName);
               setVisible("visible");
               console.log(hash);
             })
@@ -188,7 +221,7 @@ function CreaActivo() {
       setMessage("Datos invalidos");
       Swal.fire({
         title: "Información Invalida",
-        text: "No pueden existir datos nulos",
+        text: "Existen datos erroneos en el formulario",
         icon: "warning",
         confirmButtonText: "Aceptar",
       });
@@ -221,7 +254,7 @@ function CreaActivo() {
                   style={{ width: "auto", height: "120px" }}
                 >
                   <Card.Header as="h3" style={{ color: "#2043b6" }}>
-                    Certificado
+                    Reporte
                   </Card.Header>
                   <Card.Body>
                     <div className="input-group">
@@ -329,14 +362,14 @@ function CreaActivo() {
                   style={{ width: "auto", height: "120px" }}
                 >
                   <Card.Header as="h3" style={{ color: "#2043b6" }}>
-                    Area Impacto
+                    Area de Impacto
                   </Card.Header>
                   <Card.Body>
                     <div className="input-group">
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="area impacto"
+                        placeholder="Indique el area de impacto de la iniciativa"
                         ref={areaimpacto}
                       />
                     </div>
@@ -396,7 +429,7 @@ function CreaActivo() {
                       <Form.Group controlId="nombreIniciativa">
                         <Form.Control
                           type="text"
-                          placeholder="Grupos beneficiarios"
+                          placeholder="Grupos beneficidos con la actividad"
                           value={nuevoBeneficiario}
                           onChange={handleNombreChange}
                         />
@@ -431,6 +464,51 @@ function CreaActivo() {
               <Col xs={12} md={4} s={{ order: 1 }} style={{ padding: "10px" }}>
                 <Card
                   border="primary"
+                  style={{ width: "auto", height: "auto" }}
+                >
+                  <Card.Header as="h3" style={{ color: "#2043b6" }}>
+                  Acciones Implementadas  
+                  </Card.Header>
+                  <Card.Body>
+                    <Form>
+                      <Form.Group controlId="AccionesImplementadas">
+                        <Form.Control
+                          type="text"
+                          placeholder="Acciones implementadas en la iniciativa"
+                          value={nuevaAccion}
+                          onChange={handleaccionChange}
+                        />
+                        <Button
+                          variant="primary"
+                          onClick={handleAgregarAcciones}
+                          style={{
+                            marginLeft: "10px",
+                            marginTop: "10px",
+                            marginBottom: "10px",
+                            height: "auto",
+                            width: "190px",
+                            backgroundColor: "#2043b6",
+                            textAlign: "center",
+                          }}
+                        >
+                          Agregar
+                          {/* <FontAwesomeIcon icon={faPlus} /> */}
+                        </Button>
+                        <div>
+                          <ul>
+                            {accion.map((accion, index) => (
+                              <li key={index}>{accion}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </Form.Group>
+                    </Form>
+                  </Card.Body>
+                </Card>
+              </Col>
+              {/* <Col xs={12} md={4} s={{ order: 1 }} style={{ padding: "10px" }}>
+                <Card
+                  border="primary"
                   style={{ width: "auto", height: "120px" }}
                 >
                   <Card.Header as="h5" style={{ color: "#2043b6" }}>
@@ -447,7 +525,7 @@ function CreaActivo() {
                     </div>
                   </Card.Body>
                 </Card>
-              </Col>
+              </Col> */}
               <Col xs={12} md={4} s={{ order: 1 }} style={{ padding: "10px" }}>
                 <Card
                   border="primary"
@@ -577,7 +655,7 @@ function CreaActivo() {
                             paddingTop: "20px",
                           }}
                         >
-                          <strong>Impacto Ambiental :</strong> {_areaimpacto}
+                          <strong>Area de Impacto :</strong> {_areaimpacto}
                         </h5>
                         <h5
                           style={{
@@ -593,10 +671,20 @@ function CreaActivo() {
                             style={{
                               overflowWrap: "break-word",
                               borderTop: "15px",
-                              paddingTop: "80px",
+                              paddingTop: "50px",
                             }}
                           >
                             <strong>Identificador :</strong> {message}
+                          </p>
+
+                          <p
+                            style={{
+                              overflowWrap: "break-word",
+                              borderTop: "5px",
+                              paddingTop: "10px",
+                            }}
+                          >
+                            <strong>Reporte :</strong> {file}
                           </p>
                         </footer>
                       </div>
