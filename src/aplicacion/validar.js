@@ -11,8 +11,8 @@ import Swal from "sweetalert2";
 //import CHECKSUM from '../shared/checksum';
 //import RNFS from "react-native-fs";
 const CryptoJS = require("crypto-js");
-const baseURL = "https://r3colectaback.herokuapp.com/asg/asgid/";
-//const baseURL = "http://localhost:3500/asg/asgid/";
+//const baseURL = "https://r3colectaback.herokuapp.com/asg/asgid/";
+const baseURL = "http://localhost:3500/asg/asgid/";
 function Validar() {
   const [checksumvalue, setChecksumValue] = useState(["data"]);
   const [data, setData] = useState([]);
@@ -63,7 +63,7 @@ function Validar() {
           // setChecksumValue(text);
           Swal.fire({
             title: "Certificado Valido",
-            text: "El Certificado generado por R3COLECA",
+            text: "El Certificado ha sido generado por la Gobernación de Potosí",
             icon: "success",
             confirmButtonText: "Aceptar",
           });
@@ -73,6 +73,7 @@ function Validar() {
         } else {
           setMessage("CERTIFICADO NO VALIDADO");
           setChecksumValue("{data: no avalible}");
+          setData("");
           Swal.fire({
             title: "Certificado Invalido",
             text: "El Certificado no coincide con el Identificador",
