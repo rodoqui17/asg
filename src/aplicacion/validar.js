@@ -11,8 +11,8 @@ import Swal from "sweetalert2";
 //import CHECKSUM from '../shared/checksum';
 //import RNFS from "react-native-fs";
 const CryptoJS = require("crypto-js");
-//const baseURL = "https://r3colectaback.herokuapp.com/asg/asgid/";
-const baseURL = "http://localhost:3500/asg/asgid/";
+const baseURL = "https://backend-one-tawny-80.vercel.app/asg/asgid/";
+//const baseURL = "http://localhost:3500/asg/asgid/";
 function Validar() {
   const [checksumvalue, setChecksumValue] = useState(["data"]);
   const [data, setData] = useState([]);
