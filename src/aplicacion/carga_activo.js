@@ -290,6 +290,9 @@ if (
                         <option value="Participación en Iniciativas de RSC">
                           Participación en Iniciativas de RSC
                         </option>
+                        <option value="Certificación de Origen">
+                          Certificación de Origen
+                        </option>
                       </select>
                     </Dropdown>
                   </Card.Body>

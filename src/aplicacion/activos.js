@@ -5,8 +5,8 @@ import NAVEGATION from "./navegation";
 import axios from 'axios';
 import { useAuth } from "../auth/auth";
 
-// const baseURL = "https://r3colectaback.herokuapp.com/asg/asg";
-const baseURL = "http://localhost:3500/asg/asg";
+ const baseURL = "https://backend-one-tawny-80.vercel.app/asg/asg";
+//const baseURL = "http://localhost:3500/asg/asg";
 function Activos() {
   const [respuestas, setRespuestas] = useState([]);
   const auth = useAuth();
