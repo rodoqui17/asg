@@ -17,6 +17,15 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { create } from "ipfs-http-client";
+import { PinataSDK } from "pinata-web3";
+const pinata = new PinataSDK({
+  pinataJwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIyZTIyNzVhYi1jNWIwLTQwYjktOTA4OS0wYTcwZGVmMjI2NGIiLCJlbWFpbCI6InF1aXJvei5yb2RyaWdvQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6Ik5ZQzEifV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiIwZjc0NTAxZTZjYzY2MTRkN2I4YiIsInNjb3BlZEtleVNlY3JldCI6ImQzZGE5NDgxYWQ1NTdjZTI5Zjg1ZGNjMGY0ZDRlZTAwYTFiYzI4YjllODU1M2JjNTZmOGJmNTY2YzRlNzZiZDYiLCJleHAiOjE3NjQ4MTMyMTl9.62AN1FB_gUVFc3jyOZC6ZIxGTZi83vJMdFEhpCZx_S0",
+  pinataGateway: "indigo-apparent-armadillo-868.mypinata.cloud",
+});
+
+const ipfs = create({ url: "http://127.0.0.1:8080" }); // Cambia la URL si usas otro nodo
+
 const CryptoJS = require("crypto-js");
 const baseURL = "https://backend-one-tawny-80.vercel.app/asg/newasg";
 //const baseURL = "http://localhost:3500/asg/newasg";
@@ -37,9 +46,10 @@ function CreaActivo() {
   const [nuevoBeneficiario, setnuevoBeneficario] = useState("");
   const [nuevaAccion, setnuevaAccion] = useState("");
   const [file, setFile] = useState("");
+  const [ipfsfile, setipfsfile] = useState("");
 
 
-  
+
   const handleNombreChange = (e) => {
     setnuevoBeneficario(e.target.value);
   };
@@ -128,50 +138,101 @@ function CreaActivo() {
   function send() {
 
 
-const latitudeRegex = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/;
-const longitudeRegex = /^[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/;
-const fileNameRegex = /^[^\\]*[\\]?([^\\]+)$/;  // Expresión regular para extraer el nombre del archivo desde la ruta
+    const latitudeRegex = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/;
+    const longitudeRegex = /^[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/;
+    const fileNameRegex = /^[^\\]*[\\]?([^\\]+)$/;  // Expresión regular para extraer el nombre del archivo desde la ruta
 
-// Usa la expresión regular para extraer el nombre del archivo desde la ruta
-const inputFilePath = inputfile.current.value;
-console.log(inputFilePath);
+    // Usa la expresión regular para extraer el nombre del archivo desde la ruta
+    const inputFilePath = inputfile.current.value;
+    console.log(inputFilePath);
 
-// Extraer el nombre del archivo desde la ruta, teniendo en cuenta "fakepath"
-const fileNameMatch = /([^\\]+)$/.exec(inputFilePath);
-const fileName = fileNameMatch ? fileNameMatch[1] : "";
-console.log(fileName);
-if (
-  selectedIndicator !== "" &&
-  nombre.current.value !== "" &&
-  inputfile.current.value !== "" &&
-  descripcion.current.value !== "" &&
-  areaimpacto.current.value !== "" &&
-  latitud.current.value !== "" &&
-  latitudeRegex.test(latitud.current.value) &&  // Validate latitude format
-  longitud.current.value !== "" &&
-  longitudeRegex.test(longitud.current.value) &&  // Validate longitude format
-  iniciativas.length !== 0 &&
-  acciones.length !== "" &&
-  impacto.current.value !== "" &&
-  responsables.current.value !== ""
-) {
+    // Extraer el nombre del archivo desde la ruta, teniendo en cuenta "fakepath"
+    const fileNameMatch = /([^\\]+)$/.exec(inputFilePath);
+    const fileName = fileNameMatch ? fileNameMatch[1] : "";
+    console.log(fileName);
+    if (
+      selectedIndicator !== "" &&
+      nombre.current.value !== "" &&
+      inputfile.current.value !== "" &&
+      descripcion.current.value !== "" &&
+      areaimpacto.current.value !== "" &&
+      latitud.current.value !== "" &&
+      latitudeRegex.test(latitud.current.value) &&  // Validate latitude format
+      longitud.current.value !== "" &&
+      longitudeRegex.test(longitud.current.value) &&  // Validate longitude format
+      iniciativas.length !== 0 &&
+      acciones.length !== "" &&
+      impacto.current.value !== "" &&
+      responsables.current.value !== ""
+    ) {
       async function obtenerHash() {
         try {
-          const hash = await calculateSHA256(inputfile.current.files[0]);
+          if (!inputfile.current.files || !inputfile.current.files[0]) {
+            Swal.fire({
+              title: "Error",
+              text: "No se ha seleccionado un archivo.",
+              icon: "error",
+              confirmButtonText: "Aceptar",
+            });
+            return;
+          }
 
-          Swal.fire({
-            title: "REGISTRO GENERADO",
-            text: hash,
-            icon: "success",
-            confirmButtonText: "Aceptar",
-          });
+          // Obtener archivo seleccionado y calcular hash
+          const file = inputfile.current.files[0];
+          const hash = await calculateSHA256(file);
 
-          // setMessage(hash);
+          // Verificar si el hash ya existe
+          const url = `https://backend-one-tawny-80.vercel.app/asg/asgid/${hash}`;
+          console.log(`URL generada: ${url}`);
+          try {
+            const response = await axios.get(url);
+            if (response.data.identificador === hash) {
+              Swal.fire({
+                title: "DOCUMENTO YA REGISTRADO",
+                text: hash,
+                icon: "error",
+                confirmButtonText: "Aceptar",
+              });
+              return;
+            }
+          } catch (error) {
+            if (error.response && error.response.status === 404) {
+              console.log("Hash no encontrado. Procediendo a registrar...");
+            } else {
+              console.error("Error al realizar la solicitud:", error);
+              Swal.fire({
+                title: "Error",
+                text: "Ocurrió un problema al verificar el documento.",
+                icon: "error",
+                confirmButtonText: "Aceptar",
+              });
+              return;
+            }
+          }
 
-          // Ahora hash contiene el valor resuelto de la promesa
-          console.log(hash);
+          // Subir archivo comprimido a IPFS
+          let ipfsHash = "";
+          try {
+            // const fileBuffer = await file.arrayBuffer(); // Convertir archivo a buffer
+            // const compressed = await compressFile(fileBuffer); // Comprimir archivo (función explicada más abajo)
+            const upload = await pinata.upload.file(file); // Subir a IPFS
+            console.log(upload.IpfsHash);
 
-          // Enviamos el POST para el registro
+            ipfsHash = upload.IpfsHash; // Obtener CID en formato string
+            console.log("Archivo subido a IPFS con hash:", ipfsHash);
+            setipfsfile(ipfsHash);
+          } catch (ipfsError) {
+            console.error("Error al subir archivo a IPFS:", ipfsError);
+            Swal.fire({
+              title: "Error",
+              text: "No se pudo subir el archivo a IPFS.",
+              icon: "error",
+              confirmButtonText: "Aceptar",
+            });
+            return;
+          }
+
+          // Datos para el registro en el backend
           const datosJSON = {
             tipoIndicador: selectedIndicator,
             nombre: nombre.current.value,
@@ -185,34 +246,54 @@ if (
             responsableParticipacion: responsables.current.value,
             identificador: hash,
             file: fileName,
-            
+            ipfsHash: ipfsHash, // Hash del archivo en IPFS
           };
 
-          setMessage(hash);
-          console.log(datosJSON);
-          axios
-            .post(baseURL, datosJSON)
-            //.get(baseURL)
-            .then((response) => {
-              setPost(JSON.stringify(response.data));
-              console.log(response.data);
-              setTipoIndicador(response.data.tipoIndicador);
-              setNombre(response.data.nombre);
-              SetImpacto(response.data.impactoSocial);
-              setnuevoBeneficario(response.data.beneficiarios);
-              SetDescripcion(response.data.descripcion);
-              setAreaImpacto(response.data.areaImpacto);
-              setFile(fileName);
-              setVisible("visible");
-              console.log(hash);
-            })
-            .catch((error) => {
-              console.log(error);
+          console.log("Datos para registrar:", datosJSON);
+
+          // Registrar el hash y el archivo en el backend
+          try {
+            const postResponse = await axios.post(baseURL, datosJSON);
+            console.log("Registro exitoso:", postResponse.data);
+
+            Swal.fire({
+              title: "REGISTRO GENERADO",
+              text: `Hash registrado: ${hash}`,
+              icon: "success",
+              confirmButtonText: "Aceptar",
             });
+
+            // Actualizar estado o realizar acciones adicionales
+            setPost(JSON.stringify(postResponse.data));
+            setTipoIndicador(postResponse.data.tipoIndicador);
+            setNombre(postResponse.data.nombre);
+            SetImpacto(postResponse.data.impactoSocial);
+            setnuevoBeneficario(postResponse.data.beneficiarios);
+            SetDescripcion(postResponse.data.descripcion);
+            setAreaImpacto(postResponse.data.areaImpacto);
+            setFile(fileName);
+            setVisible("visible");
+          } catch (postError) {
+            console.error("Error al registrar el hash:", postError);
+            Swal.fire({
+              title: "Error",
+              text: "No se pudo registrar el documento.",
+              icon: "error",
+              confirmButtonText: "Aceptar",
+            });
+          }
         } catch (error) {
-          console.error("Error al calcular el hash:", error);
+          console.error("Error general:", error);
+          Swal.fire({
+            title: "Error",
+            text: "Ocurrió un error inesperado.",
+            icon: "error",
+            confirmButtonText: "Aceptar",
+          });
         }
       }
+
+
 
       // Llamada a la función asincrónica
       obtenerHash();
@@ -470,7 +551,7 @@ if (
                   style={{ width: "auto", height: "auto" }}
                 >
                   <Card.Header as="h3" style={{ color: "#2043b6" }}>
-                  Acciones Implementadas  
+                    Acciones Implementadas
                   </Card.Header>
                   <Card.Body>
                     <Form>
@@ -689,6 +770,16 @@ if (
                           >
                             <strong>Reporte :</strong> {file}
                           </p>
+                          <p
+                            style={{
+                              overflowWrap: "break-word",
+                              borderTop: "5px",
+                              paddingTop: "10px",
+                            }}
+                          >
+                            <strong>IPFS HASH :</strong> {ipfsfile}
+                          </p>
+
                         </footer>
                       </div>
                     </div>
