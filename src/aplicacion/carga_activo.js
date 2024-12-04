@@ -19,12 +19,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { create } from "ipfs-http-client";
 import { PinataSDK } from "pinata-web3";
+
 const pinata = new PinataSDK({
   pinataJwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIyZTIyNzVhYi1jNWIwLTQwYjktOTA4OS0wYTcwZGVmMjI2NGIiLCJlbWFpbCI6InF1aXJvei5yb2RyaWdvQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6Ik5ZQzEifV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiIwZjc0NTAxZTZjYzY2MTRkN2I4YiIsInNjb3BlZEtleVNlY3JldCI6ImQzZGE5NDgxYWQ1NTdjZTI5Zjg1ZGNjMGY0ZDRlZTAwYTFiYzI4YjllODU1M2JjNTZmOGJmNTY2YzRlNzZiZDYiLCJleHAiOjE3NjQ4MTMyMTl9.62AN1FB_gUVFc3jyOZC6ZIxGTZi83vJMdFEhpCZx_S0",
   pinataGateway: "indigo-apparent-armadillo-868.mypinata.cloud",
 });
-
-const ipfs = create({ url: "http://127.0.0.1:8080" }); // Cambia la URL si usas otro nodo
 
 const CryptoJS = require("crypto-js");
 const baseURL = "https://backend-one-tawny-80.vercel.app/asg/newasg";
@@ -47,6 +46,8 @@ function CreaActivo() {
   const [nuevaAccion, setnuevaAccion] = useState("");
   const [file, setFile] = useState("");
   const [ipfsfile, setipfsfile] = useState("");
+  const [loading, setLoading] = useState(false); // Estado para controlar la carga
+
 
 
 
@@ -166,6 +167,7 @@ function CreaActivo() {
       responsables.current.value !== ""
     ) {
       async function obtenerHash() {
+        setLoading(true);
         try {
           if (!inputfile.current.files || !inputfile.current.files[0]) {
             Swal.fire({
@@ -221,6 +223,7 @@ function CreaActivo() {
             ipfsHash = upload.IpfsHash; // Obtener CID en formato string
             console.log("Archivo subido a IPFS con hash:", ipfsHash);
             setipfsfile(ipfsHash);
+            setLoading(false);
           } catch (ipfsError) {
             console.error("Error al subir archivo a IPFS:", ipfsError);
             Swal.fire({
@@ -657,6 +660,13 @@ function CreaActivo() {
               </Col>
               <Col xs={12} md={12} s={{ order: 1 }} style={{ padding: "30px" }}>
                 {" "}
+                {/* Mostrar el mensaje de "Cargando certificado" mientras se sube el archivo */}
+                {loading && (
+                  <div className="d-flex justify-content-center align-items-center mt-3">
+                    <div className="spinner-border" role="status"></div>
+                    <span className="ml-3">Cargando certificado...</span>
+                  </div>
+                )}
                 {/* <Card
                   border="primary"
                   style={{ width: "auto", height: "auto" }}
@@ -777,7 +787,7 @@ function CreaActivo() {
                               paddingTop: "10px",
                             }}
                           >
-                            <strong>IPFS HASH :</strong> {ipfsfile}
+                            <strong>IPFS HASH :</strong> https://indigo-apparent-armadillo-868.mypinata.cloud/ipfs/{ipfsfile}
                           </p>
 
                         </footer>
